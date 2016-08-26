@@ -12,7 +12,7 @@ import { SCHOOL_NAME } from '../../config/env';
 import App from './App';
 import Dashboard from '../components/Dashboard/Dashboard';
 
-export default class Root extends Component {
+class Root extends Component {
   render() {
     const { history, store, locale } = this.props;
     return (
