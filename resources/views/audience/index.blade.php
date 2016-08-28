@@ -7,6 +7,7 @@
     <meta name="_token" content="{!! csrf_token() !!}" />
     <meta name="domain" content="{{$domain}}" />
     <meta name="school" content="{{$school}}" />
+    <meta name="conference_id" content="{{$conference_id}}" />
     <title>@yield('title', app_name())</title>
     <!-- Webpack compiled -->
     @if ($env === 'local')

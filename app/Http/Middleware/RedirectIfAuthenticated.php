@@ -22,7 +22,17 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/nagoya-u/teacher/lectures');
+            /*
+             * ログイン済みであればルートパラメーターからschool_nameを取得して
+             * connectionごとのダッシュボードへリダイレクト
+             */
+            return $request->route('school');
+
+            if ($request->route('school')) {
+                return redirect($request->route('school') . '/teacher/lectures');
+            } else {
+                return redirect('conference/teacher/dashboard');
+            }
         }
 
         return $next($request);

@@ -3,7 +3,7 @@
 @section('after-styles-end')
 <link rel="stylesheet" href="/css/schools/form.css">
 <link rel="stylesheet" href="/css/schools/main.css">
-<link rel="stylesheet" href="/css/schools/nagoya-u.css">
+<link rel="stylesheet" href="/css/schools/{{$connection_name}}.css">
 @endsection
 
 @section('content')
@@ -29,7 +29,7 @@
             @include('includes.partials.messages')
             <img id="profile-img" class="profile-img-card" src="{{$logo_path}}" />
             <p id="profile-name" class="profile-name-card"></p>
-            <form class="form-signin" method="POST" action="/{{$connection}}/signin">
+            <form class="form-signin" method="POST" action="/{{$db_name}}/signin">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                 <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
@@ -40,9 +40,9 @@
                 </div>
                 <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
             </form><!-- /form -->
-            <a href="/{{$connection}}/password/reset" class="forgot-password">パスワードを忘れた</a>
+            <a href="/{{$connection_name}}/password/reset" class="forgot-password">パスワードを忘れた</a>
             <div class="center-block">
-                <a href="/{{$connection}}/signup" class="toSignup">新規登録</a>            
+                <a href="/{{$connection_name}}/signup" class="toSignup">新規登録</a>            
             </div>  
         </div><!-- /card-container -->
     </div><!-- /container -->

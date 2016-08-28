@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 // Config
 import { BROWSER_NAME } from '../../../config/env';
-// Actions
-import * as DashboardActions from '../../actions/dashboard';
 // Material-ui
 import { List, ListItem, Divider, Avatar, IconButton } from 'material-ui';
 import { grey900, grey50, cyan500 } from 'material-ui/styles/colors';
@@ -15,16 +13,7 @@ import ActionThumbUp from 'material-ui/svg-icons/action/thumb-up';
 class Message extends Component {
   constructor(props, context) {
     super(props, context);
-    const { application, conference, actions: {fetchMessages} } = props;
-
-    fetchMessages({
-      token: application.auditorCode,
-      conference: conference.conference.id
-    });
-
     this.state = {
-      intervalId: null,
-      interval: 2000,
       rem: 10,
       innerHeight: window.innerHeight,
       textareaHeight: 26,
@@ -33,36 +22,20 @@ class Message extends Component {
     };
   }
 
-  componentDidMount() {
-    const { application, conference, actions: {fetchMessages} } = this.props;
-    const intervalId = setInterval(()=> {
-      fetchMessages({
-        token: application.auditorCode,
-        conference: conference.conference.id
-      });
-    }, this.state.interval);
+  // componentDidUpdate(prevProps) {
+  //   const { sendMessage } = this.props.status;
+  //   if (prevProps.status.sendMessage.isFetching && !sendMessage.isFetching) {
+  //     const element = document.getElementById("messages");
+  //     element.scrollTop = element.scrollHeight;
+  //   }
+  // }
 
-    this.setState({intervalId});
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.state.intervalId);
-  }
-
-  componentDidUpdate(prevProps) {
-    const { sendMessage } = this.props.status;
-    if (prevProps.status.sendMessage.isFetching && !sendMessage.isFetching) {
-      const element = document.getElementById("messages");
-      element.scrollTop = element.scrollHeight;
-    }
-  }
-
-  sendMessage(e) {
-    const { application, conference, actions: {sendMessages} } = this.props;
+  sendMessage() {
+    const { token, conferenceId, sendMessages } = this.props;
     const { text } = this.state;
     sendMessages({
-      token: application.auditorCode,
-      conference: conference.conference.id,
+      conference: conferenceId,
+      token,
       text
     });
     this.setState({
@@ -72,40 +45,42 @@ class Message extends Component {
   }
 
   sendLike(id) {
-    const { status, application, actions: {sendLike} } = this.props;
+    const { token, conferenceId, sendLike, status } = this.props;
     if (!status.like.isFetching) {
       sendLike({
-        token: application.auditorCode,
+        token,
         message: id
       });
     }
   }
 
   sendDislike(id) {
-    const { status, application, actions: {sendDislike} } = this.props;
+    const { token, conferenceId, sendDislike, status } = this.props;
     if (!status.dislike.isFetching) {
       sendDislike({
-        token: application.auditorCode,
+        token,
         message: id
       }); 
     }
   }
 
   render() {
-    const { status, message } = this.props;
+    const { status, messages, enableReaction } = this.props;
     const { textareaHeight } = this.state;
-
-
 
     return (
       <div className="message-wrap">
-        <div id="messages" className="messages" style={{height: this.state.innerHeight - 94}}>
+        <div
+          id="messages"
+          className={enableReaction == 1 ? "messages enable-reaction" : "messages"}
+          style={{height: this.state.innerHeight - 94}}
+        >
         {
-          message.messages.map((m, i) => 
+          messages.map((m, i) =>
             <div className="message-node">
               <div
                 className="likes-wrap"
-                onTouchTap={() => {
+                onClick={() => {
                   m.liked ?
                   this.sendDislike(m.id) :
                   this.sendLike(m.id)
@@ -185,7 +160,7 @@ class Message extends Component {
               opacity: this.state.text.length === 0 && this.state.focus ? 0.4 : 1,
               pointerEvents: this.state.text.length === 0 ? 'none' : 'auto'
             }}
-            onTouchTap={() => this.sendMessage()}
+            onClick={() => this.sendMessage()}
           >
             <p>送信</p>
           </div>
@@ -196,26 +171,11 @@ class Message extends Component {
 }
 
 Message.propTypes = {
+  token: PropTypes.string.isRequired,
+  conferenceId: PropTypes.string.isRequired,
+  messages: PropTypes.array.isRequired,
   status: PropTypes.object.isRequired,
-  application: PropTypes.object.isRequired,
-  conference: PropTypes.object.isRequired,
-  messages: PropTypes.object.isRequired
+  enableReaction: PropTypes.string.isRequired,
 };
 
-function mapStateToProps(state, ownProps) {
-  return {
-    status: state.status,
-    application: state.application,
-    conference: state.conference,
-    message: state.message
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  const actions = Object.assign({}, DashboardActions);
-  return {
-    actions: bindActionCreators(actions, dispatch)
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Message);
+export default Message;

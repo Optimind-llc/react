@@ -60,7 +60,7 @@ class Alert extends Component {
   render() {
     const { alerts } = this.props;
     return (
-      <div>
+      <div className="alerts-wrap">
       {alerts.length > 0 &&
       <TransitionMotion
         defaultStyles={this.getDefaultValue.bind(this)()}

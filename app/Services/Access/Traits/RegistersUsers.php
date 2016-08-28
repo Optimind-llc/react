@@ -8,6 +8,8 @@ use App\Http\Requests\Frontend\Auth\RegisterRequest;
 use App\Models\Access\User\User;
 // Jobs
 use App\Jobs\Teacher\SendSignUpSucceedEmail;
+// Models
+use App\Models\Student\Affiliation;
 
 /**
  * Class RegistersUsers
@@ -20,9 +22,17 @@ trait RegistersUsers
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showRegistrationForm()
+    public function showRegistrationForm($connection_name)
     {
-        return view('frontend.auth.register');
+        $connection = Affiliation::where('connection_name', $connection_name)->firstOrFail();
+
+        $db_name = $connection->db_name;
+        $name = $connection->name;
+        $logo_path = $connection->logo_path;
+        $image_path = $connection->image_path;
+
+        return view('frontend.auth.register', compact('connection_name', 'db_name', 'name', 'logo_path', 'image_path'))
+            ->withSocialiteLinks($this->getSocialLinks());
     }
 
     /**
@@ -31,8 +41,11 @@ trait RegistersUsers
      */
     public function register(RegisterRequest $request)
     {
+        $connection = Affiliation::where('connection_name', $request->route('school'))->firstOrFail();
+        $db_name = $connection->db_name;
+
         if ($this->user->findByEmail($request->email) instanceof User) {
-            return redirect()->route('auth.register', [$request->route('school')])->withFlashDanger(trans('exceptions.frontend.auth.email_taken'));
+            return redirect()->route('auth.register', $db_name)->withFlashDanger(trans('exceptions.frontend.auth.email_taken'));
         }
 
         if (config('access.users.confirm_email'))
@@ -42,7 +55,7 @@ trait RegistersUsers
             $this->dispatch(new SendSignUpSucceedEmail($user));
             event(new UserRegistered($user));
 
-            return redirect()->route('auth.login', [$request->route('school')])->withFlashSuccess(trans('exceptions.frontend.auth.confirmation.created_confirm'));
+            return redirect()->route('auth.login', $db_name)->withFlashSuccess(trans('exceptions.frontend.auth.confirmation.created_confirm'));
         }
         else
         {

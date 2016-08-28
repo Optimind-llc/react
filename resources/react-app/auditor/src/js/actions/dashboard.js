@@ -3,7 +3,8 @@ import { ADD_SIDE_ALERT } from '../constants/ActionTypes';
 import { CALL_API } from '../middleware/fetchMiddleware';
 import { push } from 'react-router-redux';
 
-export function fetchConference() {
+export function fetchConference(id) {
+  console.log(id);
   return {
     [CALL_API]: {
       types: [
@@ -11,7 +12,7 @@ export function fetchConference() {
         types.REQUEST_CONFERENCE_SUCCESS,
         types.REQUEST_CONFERENCE_FAIL
       ],
-      endpoint: 'conference',
+      endpoint: `${id}/info`,
       method: 'GET',
       body: null
     }
@@ -33,15 +34,15 @@ export function createAuditor() {
   };
 }
 
-export function fetchMessages(body) {
+export function syncInfo(body) {
   return {
     [CALL_API]: {
       types: [
-        types.REQUEST_MESSAGES,
-        types.REQUEST_MESSAGES_SUCCESS,
-        types.REQUEST_MESSAGES_FAIL
+        types.REQUEST_SYNCINFO,
+        types.REQUEST_SYNCINFO_SUCCESS,
+        types.REQUEST_SYNCINFO_FAIL
       ],
-      endpoint: 'messages',
+      endpoint: 'syncInfo',
       method: 'POST',
       body
     }
@@ -87,6 +88,21 @@ export function sendDislike(body) {
         types.SEND_DISLIKE_FAIL
       ],
       endpoint: 'messages/dislike',
+      method: 'POST',
+      body
+    }
+  };
+}
+
+export function sendReaction(body) {
+  return {
+    [CALL_API]: {
+      types: [
+        types.SEND_REACTION,
+        types.SEND_REACTION_SUCCESS,
+        types.SEND_REACTION_FAIL
+      ],
+      endpoint: 'reactions/send',
       method: 'POST',
       body
     }

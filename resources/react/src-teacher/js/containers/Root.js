@@ -26,7 +26,7 @@ import CreateLecture from '../components/Lecture/CreateLecture/CreateLecture';
 import User from '../components/User/User';
 import Profile from '../components/User/Profile';
 
-export default class Root extends Component {
+class Root extends Component {
   render() {
     const { history, store, locale } = this.props;
     return (

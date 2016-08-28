@@ -6,10 +6,10 @@ import application from './application';
 import alert from './alert';
 import disposable from './disposable';
 import conference from './conference';
-import message from './message';
+import displayInfo from './displayInfo';
 
 const rootReducer = combineReducers(Object.assign({
-  status, application, alert, disposable, conference, message
+  status, application, alert, disposable, conference, displayInfo
 }, {
   routing: routeReducer
 }

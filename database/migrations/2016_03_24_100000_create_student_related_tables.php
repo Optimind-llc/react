@@ -29,7 +29,6 @@ class CreateStudentRelatedTables extends Migration
              * Add Foreign/Unique/Index
              */
             $table->unique('name');
-            $table->unique('db_name');
         });
 
         Schema::create('students', function (Blueprint $table) {

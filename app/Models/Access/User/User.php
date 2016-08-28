@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Access\User\Traits\Attribute\UserAttribute;
 use App\Models\Access\User\Traits\Relationship\UserRelationship;
 use App\Models\CustomRelations;
+// Models
+use App\Models\Student\Affiliation;
 
 /**
  * Class User
@@ -44,9 +46,11 @@ class User extends Authenticatable
      */
     public function __construct()
     {
-        $school = \Request::route('school');
-        if (isset($school)) {
-            $this->setConnection($school);
+        $connection_name = \Request::route('school');
+        $connection = Affiliation::where('connection_name', $connection_name)->firstOrFail();
+
+        if (isset($connection_name)) {
+            $this->setConnection($connection->db_name);
         }
     }
 }

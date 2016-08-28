@@ -11,6 +11,7 @@ use App\Models\Conference\User;
 use App\Models\Conference\Conference;
 use App\Models\Conference\Message;
 use App\Models\Conference\Like;
+use App\Models\Conference\Reaction;
 //Requests
 use Illuminate\Http\Request;
 //Exceptions
@@ -71,16 +72,45 @@ class AudienceController extends Controller
         return $messages;
     }
 
+    protected function getReactions($conference_id, $auditor_id)
+    {
+        $reactions = Reaction::where('conference_id', $conference_id);
+
+        $basic = $reactions->where('type', 0)
+            ->select(['auditor_id', 'type', 'created_at'])
+            ->get()
+            ->map(function ($item, $key) {
+                return [
+                    'auditor_id' => strval($item->auditor_id),
+                    'type' => strval($item->type),
+                    'created_at' => $item->created_at->timestamp
+                ];
+            });
+
+        $active = $reactions->where('type', '>', 0)
+            ->select(['auditor_id', 'type', 'created_at'])
+            ->get()
+            ->map(function ($item, $key) {
+                return [
+                    'auditor_id' => strval($item->auditor_id),
+                    'type' => strval($item->type),
+                    'created_at' => $item->created_at->timestamp
+                ];
+            });
+
+        return ['basic' => $basic, 'active' => $active];
+    }
+
     /**
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index($conference_id)
     {
         $domain = env('APP_URL');
         $env = env('APP_ENV');
         $school = 'conference';
 
-        return view('audience.index', compact('domain', 'env', 'school'));
+        return view('audience.index', compact('domain', 'env', 'school', 'conference_id'));
     }
 
     public function createAuditor()
@@ -110,14 +140,19 @@ class AudienceController extends Controller
         ], 200);
     }
 
-    public function messages(Request $request)
+    public function syncInfo(Request $request)
     {
         $conference = $this->getConference($request->conference);
         $auditor = $this->getAuditor($request->token);
 
         $messages = $this->getMessages($conference->id, $auditor->id);
+        $reactions = $this->getReactions($conference->id, $auditor->id);
 
-        return \Response::json($messages, 200);
+        return \Response::json([
+            'setting' => $conference->first(['enable_message', 'enable_like', 'enable_reaction']),
+            'messages' => $messages,
+            'reactions' => $reactions,
+        ], 200);
     }
 
     public function sendMessage(Request $request)
@@ -135,8 +170,13 @@ class AudienceController extends Controller
         $message->save();
 
         $messages = $this->getMessages($conference->id, $auditor->id);
+        $reactions = $this->getReactions($conference->id, $auditor->id);
 
-        return \Response::json($messages, 200);
+        return \Response::json([
+            'setting' => $conference->first(['enable_message', 'enable_like', 'enable_reaction']),
+            'messages' => $messages,
+            'reactions' => $reactions,
+        ], 200);
     }
 
     public function like(Request $request)
@@ -161,13 +201,16 @@ class AudienceController extends Controller
         $like->updated_at = $now;
         $like->save();
 
-        $conference_id = Message::find($request->message)
-            ->conference
-            ->id;
+        $conference = Message::find($request->message)->conference;
 
-        $messages = $this->getMessages($conference_id, $auditor->id);
+        $messages = $this->getMessages($conference->id, $auditor->id);
+        $reactions = $this->getReactions($conference->id, $auditor->id);
 
-        return \Response::json($messages, 200);
+        return \Response::json([
+            'setting' => $conference->first(['enable_message', 'enable_like', 'enable_reaction']),
+            'messages' => $messages,
+            'reactions' => $reactions,
+        ], 200);
     }
 
     public function dislike(Request $request)
@@ -187,12 +230,38 @@ class AudienceController extends Controller
 
         $like->delete();
 
-        $conference_id = Message::find($request->message)
-            ->conference
-            ->id;
+        $conference = Message::find($request->message)->conference;
 
-        $messages = $this->getMessages($conference_id, $auditor->id);
+        $messages = $this->getMessages($conference->id, $auditor->id);
+        $reactions = $this->getReactions($conference->id, $auditor->id);
 
-        return \Response::json($messages, 200);
-    }    
+        return \Response::json([
+            'setting' => $conference->first(['enable_message', 'enable_like', 'enable_reaction']),
+            'messages' => $messages,
+            'reactions' => $reactions,
+        ], 200);
+    }
+
+    public function sendReaction(Request $request)
+    {
+        $now = Carbon::now();
+        $conference = $this->getConference($request->conference);
+        $auditor = $this->getAuditor($request->token);
+
+        $reaction = new Reaction;
+        $reaction->type = $request->type;
+        $reaction->auditor_id = $auditor->id;
+        $reaction->created_at = $now;
+        $reaction->updated_at = $now;
+        $reaction->save();
+
+        $messages = $this->getMessages($conference->id, $auditor->id);
+        $reactions = $this->getReactions($conference->id, $auditor->id);
+
+        return \Response::json([
+            'setting' => $conference->first(['enable_message', 'enable_like', 'enable_reaction']),
+            'messages' => $messages,
+            'reactions' => $reactions,
+        ], 200);
+    }
 }

@@ -57,7 +57,7 @@ Route::group(['namespace' => 'Conference', 'prefix' => '/conference'], function 
         require (__DIR__ . '/Routes/Conference/Audience.php');
     });
 
-    Route::group(['prefix' => 'teacher'], function () {
+    Route::group(['prefix' => 'teacher', 'middleware' => 'auth:sponsor'], function () {
         require (__DIR__ . '/Routes/Conference/Dashboard.php');
         require (__DIR__ . '/Routes/Conference/Lecture.php');
         require (__DIR__ . '/Routes/Conference/Room.php');

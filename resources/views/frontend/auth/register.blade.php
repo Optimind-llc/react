@@ -3,7 +3,7 @@
 @section('after-styles-end')
 <link rel="stylesheet" href="/css/schools/form.css">
 <link rel="stylesheet" href="/css/schools/main.css">
-<link rel="stylesheet" href="/css/schools/nagoya-u.css">
+<link rel="stylesheet" href="/css/schools/{{$connection_name}}.css">
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
     <!-- navigation section  -->
     <nav class="navigation" role="navigation">
       <ul class="primary-nav">
-        <li><a href="#">名古屋大学</a></li>
+        <li><a href="#">{{$name}}</a></li>
       </ul>
     </nav>
     <a href="#" class="nav-toggle">Menu<span></span></a>
@@ -23,13 +23,13 @@
 </header>
 <!-- header section --> 
 
-<div class="school-bg" style="background-image: url(/images/schools/nagoya-u-bg.jpg);">
+<div class="school-bg" style="background-image: url({{$image_path}});">
     <div class="container">
         <div class="card card-container">
             @include('includes.partials.messages')
-            <img id="profile-img" class="profile-img-card" src="/images/schools/nagoya-u-logo.png" />
+            <img id="profile-img" class="profile-img-card" src="{{$logo_path}}" />
             <p id="profile-name" class="profile-name-card"></p>
-            <form class="form-signin" method="POST" action="/nagoya-u/signup">
+            <form class="form-signin" method="POST" action="/{{$db_name}}/signup">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="text" name="family_name" id="inputEmail" class="form-control" placeholder="Family Name" required autofocus>
                 <input type="text" name="given_name" id="inputEmail" class="form-control" placeholder="Given Name" required autofocus>
@@ -42,7 +42,7 @@
                 </button>
             </form><!-- /form -->
             <div class="center-block">
-                <a href="/nagoya-u/signin" class="toSignup">アカウントをお持ちの方</a>            
+                <a href="/{{$connection_name}}/signin" class="toSignup">アカウントをお持ちの方</a>            
             </div>
         </div><!-- /card-container -->
     </div><!-- /container -->

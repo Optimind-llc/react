@@ -22,23 +22,16 @@ trait AuthenticatesUsers
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showLoginForm($connection)
+    public function showLoginForm($connection_name)
     {
-        if ($connection !== 'nagoya-u') {
-            abort(404);
-        }
+        $connection = Affiliation::where('connection_name', $connection_name)->firstOrFail();
 
-        $school = Affiliation::where('db_name', $connection)->firstOrFail();
+        $db_name = $connection->db_name;
+        $name = $connection->name;
+        $logo_path = $connection->logo_path;
+        $image_path = $connection->image_path;
 
-        if (!$school instanceof Affiliation) {
-            abort(404);
-        }
-
-        $name = $school->name;
-        $logo_path = $school->logo_path;
-        $image_path = $school->image_path;
-
-        return view('frontend.auth.login', compact('name', 'logo_path', 'image_path', 'connection'))
+        return view('frontend.auth.login', compact('connection_name', 'db_name', 'name', 'logo_path', 'image_path'))
             ->withSocialiteLinks($this->getSocialLinks());
     }
 
@@ -140,5 +133,73 @@ trait AuthenticatesUsers
 
         event(new UserLoggedIn(access()->user()));
         return redirect()->intended($this->redirectPath());
+    }
+
+    /**
+     * @param LoginRequest $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function conferenceLogin(LoginRequest $request)
+    {
+        $throttles = in_array(
+            ThrottlesLogins::class, class_uses_recursive(get_class($this))
+        );
+
+        if ($throttles && $this->hasTooManyLoginAttempts($request)) {
+            return $this->sendLockoutResponse($request);
+        }
+
+        if (\Auth::guard('sponsor')->attempt($request->only($this->loginUsername(), 'password'), $request->has('remember'))) {
+
+            $user = \Auth::guard('sponsor')->user();
+
+            if ($throttles) {
+                $this->clearLoginAttempts($request);
+            }
+
+            // if (!$user->isConfirmed())
+            // {
+            //     $token = $user->confirmation_code;
+            //     \Auth::guard('sponsor')->logout();
+            //     throw new GeneralException(trans(
+            //         'exceptions.frontend.auth.confirmation.resend',
+            //         [
+            //             'school' => $request->route('school'),
+            //             'token' => $token
+            //         ]
+            //     ));
+            // }
+            // elseif (!$user->isActive())
+            // {
+            //     \Auth::guard('sponsor')->logout();
+            //     throw new GeneralException(trans('exceptions.frontend.auth.deactivated'));
+            // }
+
+            return redirect('conference/teacher/dashboard');
+        }
+
+        if ($throttles) {
+            $this->incrementLoginAttempts($request);
+        }
+
+        return 'fail to login';
+
+        return redirect()->back()
+            ->withInput($request
+            ->only($this->loginUsername(), 'remember'))
+            ->withErrors([
+                $this->loginUsername() => trans('auth.failed')
+            ]);
+    }
+
+    public function conferenceLogout()
+    {
+        if (app('session')->has(config('access.socialite_session_name'))) {
+            app('session')->forget(config('access.socialite_session_name'));
+        }
+
+        $auth = \Auth::guard('sponsor');
+        $auth->logout();
+        return redirect($this->redirectAfterLogout);
     }
 }

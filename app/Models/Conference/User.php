@@ -40,4 +40,18 @@ class User extends Authenticatable
 	{
 		return $this->hasMany('App\Models\Conference\Conference');
 	}
+
+    /**
+     * @return bool
+     */
+    public function isActive() {
+        return $this->status == 1;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isConfirmed() {
+        return $this->confirmed == 1;
+    }
 }

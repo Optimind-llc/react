@@ -8,6 +8,9 @@ import {
   SEND_DISLIKE,
   SEND_DISLIKE_SUCCESS,
   SEND_DISLIKE_FAIL,
+  SEND_REACTION,
+  SEND_REACTION_SUCCESS,
+  SEND_REACTION_FAIL,
 } from '../constants/DashboardActionTypes';
 
 const initialState = {
@@ -22,6 +25,11 @@ const initialState = {
   },
   dislike: {
     id: null,
+    isFetching: false,
+    didInvalidate: false
+  },
+  reactions: {
+    type: 1,
     isFetching: false,
     didInvalidate: false
   }
@@ -103,6 +111,34 @@ export default function status(state = initialState, action) {
       return Object.assign({}, state, {
         dislike: {
           id: null,
+          isFetching: false,
+          didInvalidate: true
+        }
+      });
+
+    case 'SEND_REACTION':
+      return Object.assign({}, state, {
+        reactions: {
+          type: 1,
+          isFetching: true,
+          didInvalidate: false
+        }
+      });
+
+    case 'SEND_REACTION_SUCCESS':
+      console.log('in status reducer action = ', action);
+      return Object.assign({}, state, {
+        reactions: {
+          type: 1,
+          isFetching: false,
+          didInvalidate: false
+        }
+      });
+
+    case 'SEND_REACTION_FAIL':
+      return Object.assign({}, state, {
+        reactions: {
+          type: 1,
           isFetching: false,
           didInvalidate: true
         }

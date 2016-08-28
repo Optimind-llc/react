@@ -14,12 +14,12 @@ import Dashboard from '../components/Dashboard/Dashboard';
 
 class Root extends Component {
   render() {
-    const { history, store, locale } = this.props;
+    const { history, store } = this.props;
     return (
       <Provider store={store}>
         <Router history={history}>
           <Route name="Top" path="conference" component={App}>
-            <Route path="audience" component={Dashboard}/>
+            <Route path="audience/:id" component={Dashboard}/>
           </Route>
         </Router>
         {/*<DevTools/>*/}
@@ -28,14 +28,10 @@ class Root extends Component {
   }
 }
 
-Root.propTypes = {
-  locale: PropTypes.string.isRequired
-};
+Root.propTypes = {};
 
 function mapStateToProps(state) {
-  return {
-    locale: state.application.locale
-  };
+  return {};
 }
 
 export default connect(mapStateToProps)(Root);

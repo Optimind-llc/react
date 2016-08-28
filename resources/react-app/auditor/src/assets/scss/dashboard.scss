@@ -1,8 +1,85 @@
 div.dashboard-wrap {
+    div.reaction-wrap {
+
+        &.enable-message {
+            height: 320px;
+            div.reaction-button-understood {
+                margin-top: 20px;
+            }
+            div.reaction-button-not-understood {
+                margin-top: 10px;
+            }
+        }
+
+        padding: 110px 0 0 0;
+        height: calc(100% - 110px);
+        
+        background-color: rgba(17,25,142,1);
+
+        p {
+            margin: 10px 15px 0 25px;
+            color: rgb(240,240,240);
+        }
+
+        div {
+            width: 200px;
+            height: 50px;
+            margin: auto;
+            margin-top: 10px;
+            background-color: #080D3F;
+            border: solid 3px white;
+            border-radius: 10px;
+            position: relative;
+
+            &:active {
+                background-color: #292B3E;
+                p {
+                    color: white;
+                }
+
+                img {
+                    height: 26px;
+                    top: 10px;
+                    left: 7px;
+                }
+
+            }
+
+            &.reaction-button-understood {
+                margin-top: 100px;
+            }
+
+            &.reaction-button-not-understood {
+                margin-top: 30px;
+            }
+
+            img {
+                position: absolute;
+                top: 8px;
+                left: 5px;
+            }
+
+            p {
+                position: absolute;
+                top: 10px;
+                left: 45px;
+                margin: auto;
+                font-size: 20px;
+                text-align: 'center';
+            }
+
+        }
+    }
+
     div.messages {
         padding-bottom: 5rem;
+        padding-top: 110px;
         overflow: scroll;
         -webkit-overflow-scrolling: touch;
+
+        &.enable-reaction {
+            padding-top: 0;
+        }
 
         div.message-node {
             position: relative;

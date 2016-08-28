@@ -5,6 +5,15 @@
  */
 Route::group(['namespace' => 'Auth'], function () {
 
+    Route::group(['middleware' => 'auth:sponsor'], function () {
+        Route::get('conference/signout', 'AuthController@conferenceLogout');
+    });
+
+    Route::group(['middleware' => 'guest:sponsor'], function () {
+        Route::post('conference/signin', 'AuthController@conferenceLogin');
+        Route::post('conference/signup', 'AuthController@register');
+    });
+
     /**
      * These routes require the user to be logged in
      */

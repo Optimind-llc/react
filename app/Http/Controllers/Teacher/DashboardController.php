@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 //Models
 use App\Models\Lecture\Room;
 use App\Models\Student\Reaction;
+use App\Models\Student\Affiliation;
+
 //Exceptions
 use App\Exceptions\ApiException;
 use Carbon\Carbon;
@@ -22,9 +24,11 @@ class DashboardController extends Controller
      */
     public function index($school)
     {
+        $connection = Affiliation::where('connection_name', $connection_name)->firstOrFail();
+        $db_name = $connection->db_name;
         $domain = env('APP_URL');
         $env = env('APP_ENV');
-        return view('teacher.index', compact('domain', 'env', 'school'));
+        return view('teacher.index', compact('domain', 'env', 'db_name'));
     }
 
     /**

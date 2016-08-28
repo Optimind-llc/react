@@ -4,9 +4,9 @@ namespace App\Models\Conference;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Conference\User;
+use App\Models\Student\Student;
 
-class Conference extends Model
+class Reaction extends Model
 {
 	use SoftDeletes;
 
@@ -33,18 +33,8 @@ class Conference extends Model
         }
     }
 
-	public function user()
-	{
-		return $this->belongsTo('App\Models\Conference\User');
-	}
-
-    public function messages()
+    public function conference()
     {
-        return $this->hasMany('App\Models\Conference\Message');
-    }
-
-    public function reactions()
-    {
-        return $this->hasMany('App\Models\Conference\Reaction');
+        return $this->belongsTo('App\Models\Conference\Conference');
     }
 }
