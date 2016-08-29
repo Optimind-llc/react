@@ -8,9 +8,10 @@ const initialState = {
   exist: false,
   room: null,
   basic: null,
-  reactions: null,
   line: null,
   pie: null,
+  reactions: null,
+  conference: null,
   isFetching: false,
   didInvalidate: false
 };
@@ -28,9 +29,10 @@ export default function dashboardCharts(state = initialState, action) {
       exist: action.payload.exist,
       room: action.payload.room,
       basic: action.payload.basic,
+      // line: action.payload.charts.line,
+      // pie: action.payload.charts.pie,
       reactions: action.payload.reactions,
-      line: action.payload.charts.line,
-      pie: action.payload.charts.pie,
+      conference: action.payload.conference,
       isFetching: false,
       didInvalidate: false
     });

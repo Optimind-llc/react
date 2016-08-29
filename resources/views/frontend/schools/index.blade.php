@@ -29,7 +29,7 @@
     <div class="row">
       <div class="col-md-12 col-sm-12">
         <div class="intro-content">
-          <h4 style="text-align: center;">教師及び管理者の方は各大学のログインフォームからログインしてください</h4>
+          <h4 style="text-align: center;">管理者の方は各組織のログインフォームからログインしてください</h4>
         </div>
       </div>
     </div>
@@ -50,7 +50,7 @@
           </a>
         </div>
          <div class="col-lg-2 col-md-4 col-sm-4 work">
-          <a href="/brother/signin" class="work-box">
+          <a href="/conference/teacher/dashboard?connection_name=brother" class="work-box">
             <img src="/images/schools/brother-logo.png" alt="">
             <div class="overlay overlay-brother">
               <div class="overlay-caption">
@@ -60,7 +60,7 @@
           </a>
         </div>
         <div class="col-lg-2 col-md-4 col-sm-4 work">
-          <a href="/engineer/signin" class="work-box">
+          <a href="/conference/teacher/dashboard?connection_name=engineer" class="work-box">
             <img src="/images/schools/engineer-logo.png" alt="">
             <div class="overlay overlay-engineer">
               <div class="overlay-caption"><p>日本技術士会</p></div>

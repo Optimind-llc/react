@@ -17,7 +17,7 @@ import {
 } from '../constants/DashboardActionTypes';
 
 const initialState = {
-  displayInfo: {},
+  displayInfo: null,
   isFetching: false,
   didInvalidate: false
 };

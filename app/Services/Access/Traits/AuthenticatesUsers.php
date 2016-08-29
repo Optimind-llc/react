@@ -149,13 +149,15 @@ trait AuthenticatesUsers
             return $this->sendLockoutResponse($request);
         }
 
-        if (\Auth::guard('sponsor')->attempt($request->only($this->loginUsername(), 'password'), $request->has('remember'))) {
+        if (\Auth::guard('sponsor')->attempt($request->only($this->loginUsername(), 'password'), true)) {
 
             $user = \Auth::guard('sponsor')->user();
 
             if ($throttles) {
                 $this->clearLoginAttempts($request);
             }
+
+            return \Auth::guard('sponsor')->check() ? 'true' : 'false';
 
             // if (!$user->isConfirmed())
             // {

@@ -21,12 +21,11 @@ export default class Reaction extends Component {
     };
   }
 
-  sendReaction(e) {
-    const { token, conferenceId, actions: {sendReaction} } = this.props;
-    const { type } = this.state;
+  sendReaction(type) {
+    const { token, conferenceId, sendReaction } = this.props;
     sendReaction({
-      token: application.auditorCode,
-      conference: conference.conference.id,
+      token,
+      conference: conferenceId,
       type
     });
   }
@@ -39,14 +38,20 @@ export default class Reaction extends Component {
       <div className={enableMessage == 1 ? "reaction-wrap enable-message" : "reaction-wrap"}>
         <p>- Please tap the following two buttons to react.</p>
         <p>- Your reaction is anonymous.</p>
-        <div className="reaction-button-understood">
+        <div
+          className="reaction-button-understood"
+          onClick={() => this.sendReaction(1)}
+        >
           <img
             src="/images/audience/ok.png"
             height="30px"
           />
           <p>Understood</p>
         </div>
-        <div className="reaction-button-not-understood">
+        <div
+          className="reaction-button-not-understood"
+          onClick={() => this.sendReaction(1)}
+        >
           <img
             src="/images/audience/crying.png"
             height="30px"

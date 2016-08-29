@@ -4,6 +4,7 @@ export const PAYPAL_PUBLIC_KEY = '-----BEGIN PKCS7-----MIIHZwYJKoZIhvcNAQcEoIIHW
 export const CSRF_TOKEN = document.querySelector('meta[name="_token"]').content;
 export const DOMAIN_NAME = document.querySelector('meta[name="domain"]').content;
 export const SCHOOL_NAME = document.querySelector('meta[name="school"]').content;
+export const CONNECTION_NAME = document.querySelector('meta[name="connection"]').content;
 
 //alert message の表示時間
 export const DELETE_ALERT_INTERBAL = 3000;

@@ -14,7 +14,7 @@ class CreateReactionsTableForConference extends Migration
     {
         Schema::connection('conference')->create('reactions', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->integer('auditor_id')->unique();
+            $table->integer('auditor_id')->unsigned();
             $table->integer('conference_id')->unsigned();
             $table->tinyInteger('type')->default(0);
 

@@ -11,14 +11,16 @@ import * as LectureActions from '../../../actions/lecture';
 import { RaisedButton } from 'material-ui';
 import { Paper } from 'material-ui';
 import Colors from 'material-ui/lib/styles/colors';
+import PieCharts from './PieCharts';
 import Message from './Message';
 import SortedMessage from './SortedMessage';
 
 class Dashboard extends Component {
   constructor(props, context) {
     super(props, context);
-    const { fetchMessages } = props.actions;
+    const { fetchMessages, fetchCharts } = props.actions;
     fetchMessages();
+    fetchCharts();
     this.state = {
       intervalId: null,
       interval: 20000
@@ -46,7 +48,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { messages, actions } = this.props;
+    const { charts, messages, actions } = this.props;
     const style = {
       minHeight: window.innerHeight - 64,
       background: Colors.grey50,
@@ -67,7 +69,7 @@ class Dashboard extends Component {
                 <div className="panel-heading">
                   <div className="row">
                     <div className="pull-left room-key-wrap">
-                      <p><span></span><span>CNBイブニングピッチ</span></p>
+                      <p><span></span><span>{charts.conference.title}</span></p>
                     </div>
                     <RaisedButton
                       style={{width: 150, marginRight: 20, float:'right'}}
@@ -78,6 +80,10 @@ class Dashboard extends Component {
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div className="row">
+              <PieCharts pie={{attendance: 10, understood: 8, notUnderstand: 3}}/>
             </div>
 
             <div className="row">

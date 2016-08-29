@@ -251,6 +251,7 @@ class AudienceController extends Controller
         $reaction = new Reaction;
         $reaction->type = $request->type;
         $reaction->auditor_id = $auditor->id;
+        $reaction->conference_id = $conference->id;
         $reaction->created_at = $now;
         $reaction->updated_at = $now;
         $reaction->save();

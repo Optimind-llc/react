@@ -21,26 +21,29 @@ class DashboardController extends Controller
     /**
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
         $domain = env('APP_URL');
         $env = env('APP_ENV');
         $school = 'conference';
+        $connection = $request->connection_name;
 
-        return view('teacher.index', compact('domain', 'env', 'school'));
+        return view('teacher.index', compact('domain', 'env', 'school', 'connection'));
     }
 
     /**
      * @return \Illuminate\View\View
      */
-    public function test()
+    public function test(Request $request)
     {
         // $user = \Auth::guard('sponsor')->user();
-        $conference = User::first()->conferences()->first();
+        $user = User::where('corporate_name', $request->connection_name)->firstOrFail();
+        $conference = $user->conferences()->first();
 
         return \Response::json([
             'exist' => true,
-            'conference' => $conference
+            'conference' => $conference,
+            'reactions' => $conference->reactions,
         ], 200);
 
         // return \Response::json([

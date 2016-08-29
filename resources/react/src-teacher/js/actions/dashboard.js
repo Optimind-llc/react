@@ -2,6 +2,8 @@ import * as types from '../constants/DashboardActionTypes';
 import { ADD_SIDE_ALERT } from '../constants/ActionTypes';
 import { CALL_API } from '../middleware/fetchMiddleware';
 import { push } from 'react-router-redux';
+// Config
+import { CONNECTION_NAME } from '../../config/env';
 
 export function fetchCharts() {
   return {
@@ -11,7 +13,7 @@ export function fetchCharts() {
         types.REQUEST_CHARTS_SUCCESS,
         types.REQUEST_CHARTS_FAIL
       ],
-      endpoint: 'test',
+      endpoint: `test?connection_name=${CONNECTION_NAME}`,
       method: 'GET',
       body: null
     }

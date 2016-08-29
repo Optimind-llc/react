@@ -51,12 +51,18 @@ class MainContent extends Component {
     return (
       <div className="">
         {
+          displayInfo.displayInfo &&
           displayInfo.displayInfo.setting.enableReaction == 1 &&
           <Reaction
+            conferenceId={conference.conference.id}
+            token={application.auditorCode}
+            status={status}
+            sendReaction={actions.sendReaction}
             enableMessage={displayInfo.displayInfo.setting.enableMessage}
           />
         }
         {
+          displayInfo.displayInfo &&
           displayInfo.displayInfo.setting.enableMessage == 1 &&
           <Message
             conferenceId={conference.conference.id}

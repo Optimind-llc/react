@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Conference;
 
 use App\Http\Controllers\Controller;
+//Requests
+use Illuminate\Http\Request;
 //Models
 use App\Models\Conference\User;
 use App\Models\Conference\Conference;
@@ -27,11 +29,13 @@ class UserController extends Controller
     /**
      * @return \Illuminate\View\View
      */
-    public function info()
+    public function info(Request $request)
     {
         // $user = \Auth::guard('sponsor')->user();
-        $user = User::first();
-        $name = $user->family_name . " " . $user->given_name;
+        // $user = User::first();
+        $user = User::where('corporate_name', $request->connection_name)->firstOrFail();
+        // $name = $user->family_name . " " . $user->given_name;
+        $name = $user->family_name;
         $lectures = $user->conferences()->count();
 
         return \Response::json([
