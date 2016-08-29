@@ -69,7 +69,7 @@ class Dashboard extends Component {
                 <div className="panel-heading">
                   <div className="row">
                     <div className="pull-left room-key-wrap">
-                      <p><span></span><span>{charts.conference.title}</span></p>
+                      <p><span></span><span>{charts.exist ? charts.conference.title : ''}</span></p>
                     </div>
                     <RaisedButton
                       style={{width: 150, marginRight: 20, float:'right'}}
