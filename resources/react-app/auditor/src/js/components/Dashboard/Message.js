@@ -80,7 +80,7 @@ class Message extends Component {
             }}
         >
         {
-          messages.map((m, i) =>
+          messages.sort((m1, m2) => m1.key > m2.key ? -1 : 1).map((m, i) =>
             <div className="message-node">
               <div
                 className="likes-wrap"
