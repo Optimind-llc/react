@@ -12,6 +12,7 @@ import { RaisedButton } from 'material-ui';
 import { Paper } from 'material-ui';
 import Colors from 'material-ui/lib/styles/colors';
 import PieCharts from './PieCharts';
+import LineChart from './LineChart';
 import Message from './Message';
 import SortedMessage from './SortedMessage';
 
@@ -55,12 +56,25 @@ class Dashboard extends Component {
       padding: '0 60px 60px'
     };
 
+    var effectiveTime = 60000;
+
+    var reactions = charts.reactions;
+    var attendance, understood, notUnderstand;
+    var timestamp = new Date().getTime();
+
+    if (charts.exist) {
+      attendance = reactions.map(r => r.auditorId).filter((r, i, self) => self.indexOf(r) === i).length,
+      understood = reactions.filter(r => {
+        return r.type == 1 &&  timestamp - (Number(r.createdAt) * 1000) <= effectiveTime
+      }).map(r => r.auditorId).filter((r, i, self) => self.indexOf(r) === i).length
+      notUnderstand = reactions.filter(r => {
+        return r.type == 2 &&  timestamp - (Number(r.createdAt) * 1000) <= effectiveTime
+      }).map(r => r.auditorId).filter((r, i, self) => self.indexOf(r) === i).length
+    }
+
     return (
       <div style={style}>
         <section className="content-header">
-          <div className="row">
-            <h3>ダッシュボード</h3>
-          </div>
         </section>
         <section className="content">
           <div>
@@ -83,19 +97,36 @@ class Dashboard extends Component {
             </div>
 
             <div className="row">
-              <PieCharts pie={{attendance: 10, understood: 8, notUnderstand: 3}}/>
-            </div>
-
-            <div className="row">
-              <div className="col-md-6">
-                <div className="row" style={{marginRight: 5}}>
-                  <h3>新着順</h3>
-                  <Message messages={messages} name={true}/>
-                </div>                </div>
-              <div className="col-md-6">
-                <div className="row" style={{marginLeft: 5}}>
-                  <h3>高評価順</h3>
-                  <SortedMessage messages={messages} name={true}/>
+              <div className="col-md-8">
+                <div className="row">
+                  <PieCharts pie={{
+                    attendance: attendance,
+                    understood: understood,
+                    notUnderstand: notUnderstand
+                  }}/>
+                </div>
+                <div className="row">
+                  {charts.exist &&
+                    <LineChart
+                      reactions={charts.reactions}
+                      startAt={charts.conference.startAt}
+                    />
+                  }
+                </div>
+              </div>
+              <div className="col-md-4">
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="row" style={{marginRight: 5}}>
+                      <h3>新着順</h3>
+                      <Message messages={messages} name={true}/>
+                    </div>                </div>
+                  <div className="col-md-6">
+                    <div className="row" style={{marginLeft: 5}}>
+                      <h3>高評価順</h3>
+                      <SortedMessage messages={messages} name={true}/>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

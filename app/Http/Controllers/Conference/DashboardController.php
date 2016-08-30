@@ -43,7 +43,13 @@ class DashboardController extends Controller
         return \Response::json([
             'exist' => true,
             'conference' => $conference,
-            'reactions' => $conference->reactions,
+            'reactions' => $conference->reactions()->get()->map(function ($item, $key) {
+                return [
+                    'auditor_id' => strval($item->auditor_id),
+                    'type' => strval($item->type),
+                    'created_at' => $item->created_at->timestamp
+                ];
+            }),
         ], 200);
 
         // return \Response::json([

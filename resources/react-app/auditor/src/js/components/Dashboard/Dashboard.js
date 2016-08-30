@@ -28,8 +28,17 @@ class Dashboard extends Component {
     };
   }
 
+  sendReaction(type) {
+    const { id, application: {auditorCode}, actions: {sendReaction} } = this.props;
+    sendReaction({
+      conference: id,
+      token: auditorCode,
+      type
+    });
+  }
+
   render() {
-    const { conference, messages } = this.props;
+    const { conference } = this.props;
     const style = {
       minHeight: window.innerHeight,
       background: 'rgb(17,25,142)',
@@ -39,7 +48,10 @@ class Dashboard extends Component {
         label="Enter"
         primary={true}
         disabled={conference.isFetching || (conference.conference !== null && conference.conference.status == 0)}
-        onClick={() => this.setState({open: false})}
+        onClick={() => {
+          this.setState({open: false});
+          this.sendReaction(0);
+        }}
       />
     ];
 
@@ -188,7 +200,6 @@ Dashboard.propTypes = {
   id: PropTypes.string.isRequired,
   application: PropTypes.object.isRequired,
   conference: PropTypes.object.isRequired,
-  messages: PropTypes.object,
 };
 
 function mapStateToProps(state, ownProps) {
@@ -196,7 +207,6 @@ function mapStateToProps(state, ownProps) {
     id: ownProps.params.id,
     application: state.application,
     conference: state.conference,
-    messages: state.messages,
   };
 }
 
