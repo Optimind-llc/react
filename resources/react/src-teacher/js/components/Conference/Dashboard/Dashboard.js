@@ -24,7 +24,7 @@ class Dashboard extends Component {
     fetchCharts();
     this.state = {
       intervalId: null,
-      interval: 10000,
+      interval: 60000,
       value: 'newest',
       rightSetting: false,
       ReactionToggled: false,
@@ -161,9 +161,16 @@ class Dashboard extends Component {
             </div>
           }
           <RaisedButton
-            style={{width: 150, marginRight: 20}}
+            style={{
+              width: '100%',
+              margin: 0,
+              padding: 0,
+              position : 'absolute',
+              bottom: 0,
+            }}
             label="完了"
-            backgroundColor={'rgb(0, 188, 212)'}
+            labelColor={"white"}
+            backgroundColor={'rgb(17, 25, 142)'}
             onClick={() => this.setState({rightSetting: false})}
           />
         </LeftNav>
