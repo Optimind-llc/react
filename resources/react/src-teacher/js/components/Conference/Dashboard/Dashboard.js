@@ -29,8 +29,9 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    const { fetchMessages } = this.props.actions;
+    const { fetchCharts, fetchMessages } = this.props.actions;
     const intervalId = setInterval(()=> {
+      fetchCharts();
       fetchMessages();
     }, this.state.interval);
     this.setState({intervalId});

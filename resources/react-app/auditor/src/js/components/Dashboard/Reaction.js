@@ -15,10 +15,6 @@ import ActionThumbUp from 'material-ui/svg-icons/action/thumb-up';
 export default class Reaction extends Component {
   constructor(props, context) {
     super(props, context);
-
-    this.state = {
-      interval: 15000,
-    };
   }
 
   sendReaction(type) {
@@ -50,7 +46,7 @@ export default class Reaction extends Component {
         </div>
         <div
           className="reaction-button-not-understood"
-          onClick={() => this.sendReaction(1)}
+          onClick={() => this.sendReaction(2)}
         >
           <img
             src="/images/audience/crying.png"
