@@ -28,7 +28,6 @@ export default class Reaction extends Component {
 
   render() {
     const { status, enableMessage } = this.props;
-    const { textareaHeight } = this.state;
 
     return (
       <div className={enableMessage == 1 ? "reaction-wrap enable-message" : "reaction-wrap"}>
