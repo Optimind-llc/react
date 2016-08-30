@@ -24,7 +24,7 @@ class Dashboard extends Component {
     fetchCharts();
     this.state = {
       intervalId: null,
-      interval: 20000
+      interval: 1000
     };
   }
 
