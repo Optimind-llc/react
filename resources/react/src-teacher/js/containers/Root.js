@@ -16,7 +16,6 @@ import ConferenceDashboard from '../components/Conference/Dashboard/Dashboard';
 import Conferences from '../components/Conference/Conference/Conferences/Conferences';
 import CreateConference from '../components/Conference/Conference/CreateConference/CreateConference';
 
-
 import Student from '../components/Dashboard/Student';
 import Dashboard from '../components/Dashboard/Dashboard';
 import Lecture from '../components/Lecture/Lecture';

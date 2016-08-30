@@ -18,7 +18,7 @@ class ConfirmConference extends Component {
           </li>
           <li className="list-group-item">
             <span className="list-head">Place</span>
-            <span className="list-body" style={{wordWrap: 'break-word', width: '100%'}}>{conference !== null ? conference.place : ''}</span>
+            <span className="list-body">{conference !== null ? conference.place : ''}</span>
           </li>
           <li className="list-group-item">
             <span className="list-head">Start at</span>

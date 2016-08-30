@@ -2,12 +2,33 @@ div.dashboard-wrap {
     div.reaction-wrap {
 
         &.enable-message {
-            height: 320px;
-            div.reaction-button-understood {
-                margin-top: 20px;
-            }
-            div.reaction-button-not-understood {
-                margin-top: 10px;
+            height: 250px;
+            overflow: visible;
+
+            div {
+                width: 160px;
+                height: 46px;
+
+                &.reaction-button-understood {
+                    float: left;
+                    margin-top: 20px;
+                    margin-left: 15px;
+                }
+
+                &.reaction-button-not-understood {
+                    float: right;
+                    margin-top: 20px;
+                    margin-right: 15px;
+                }
+
+                img {
+                    height: 24px;
+                }
+
+                p {
+                    left: 38px;
+                    font-size: 16px;
+                }
             }
         }
 

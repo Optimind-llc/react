@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 // Config
-import { SCHOOL_NAME } from '../../../config/env';
+import { SCHOOL_NAME, CONNECTION_NAME } from '../../../config/env';
 // Components
 import { Avatar, Divider, List, ListItem } from 'material-ui';
 import Flag from 'material-ui/lib/svg-icons/content/flag';
@@ -85,10 +85,10 @@ class MainSidebar extends Component {
       <SelectableList pathname={pathname} push={push}>
         <ListItem
           disabled
-          leftAvatar={<Avatar src=""/>}
+          leftAvatar={<Avatar src={`/images/schools/${CONNECTION_NAME}-logo.png`}/>}
           primaryText={!user.isFetching && user.user !== null ? user.user.name : ''}
           secondaryText={
-            <p>登録授業数：{!user.isFetching && user.user !== null ? user.user.lectures : ''}</p>
+            <p>登録ルーム数：{!user.isFetching && user.user !== null ? user.user.lectures : ''}</p>
           }
           secondaryTextLines={1}
         />

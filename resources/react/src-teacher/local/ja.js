@@ -2,8 +2,8 @@
 export default {
   "unexpected": `接続エラーです。もう一度実行してください`,
 
-  "nav.dashboard": `ダッシュボード`,
-  "nav.lecture": `授業の管理`,
+  "nav.dashboard": `開講中ルーム`,
+  "nav.lecture": `ルームの管理`,
   "nav.user": `ユーザー情報`,
 
   "user.alreadyHasRoom": `すでに開講中の授業が存在しています`,

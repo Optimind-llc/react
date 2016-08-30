@@ -73,7 +73,11 @@ class Message extends Component {
         <div
           id="messages"
           className={enableReaction == 1 ? "messages enable-reaction" : "messages"}
-          style={{height: this.state.innerHeight - 94}}
+          style={{
+            height: enableReaction == 1 ?
+              this.state.innerHeight - 300 :
+              this.state.innerHeight - 94
+            }}
         >
         {
           messages.map((m, i) =>

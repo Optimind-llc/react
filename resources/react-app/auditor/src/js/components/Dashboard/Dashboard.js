@@ -63,6 +63,7 @@ class Dashboard extends Component {
           modal={true}
           open={this.state.open}
           onRequestClose={this.handleClose}
+          bodyStyle={{overflowY: 'visible'}}
         >
           {conference.isFetching &&
             <div
@@ -151,37 +152,41 @@ class Dashboard extends Component {
                 borderRadius: 0,
               }}
             >
-              <div style={{ height: 15 }}>
+              <div style={{ height: 20 }}>
                 <p 
                   style={{
                     float: 'left',
-                    marginLeft: 10,
+                    marginLeft: 15,
+                    marginBottom: 0,
                     fontSize: 12,
                     color: 'rgba(17,25,142,1)',
                   }}
                 >
                   {conference.conference.startAt}
                 </p>
-                <p 
+                <p
                   style={{
                     float: 'right',
-                    marginRight: 10,
+                    marginRight: 15,
+                    marginBottom: 0,
                     fontSize: 12,
                     color: 'rgba(17,25,142,1)',
                   }}
                 >
                   {conference.conference.place}
                 </p>
+                <div style={{clear: 'both'}}></div>
               </div>
-              <div style={{ height: 15 }}>
+              <div>
                 <p 
                   style={{
+                    float: 'none',
                     fontSize: 18,
+                    width: '100%',
                     textAlign: 'center',
                     color: 'rgba(17,25,142,1)',
-                    whiteSpace: 'nowrap',
                     fontWeight: 800,
-                    margin: 5
+                    margin: 0
                   }}
                 >
                   {conference.conference.title}
