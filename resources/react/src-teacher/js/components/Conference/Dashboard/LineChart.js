@@ -65,7 +65,7 @@ class LineChart extends Component {
         .filter((r, i, self) => self.indexOf(r) === i)
         .length;
 
-console.log('numberOfStudents = ', numberOfStudents);
+// console.log('numberOfStudents = ', numberOfStudents);
 
       switch (Ac.length){
         case 0:
@@ -92,7 +92,7 @@ console.log('numberOfStudents = ', numberOfStudents);
       }
     }
 
-console.log(understoodDate);
+// console.log(understoodDate);
 
     let nextLabel = labels.map((l, i, array) => {
       return Math.round(l/60) === Math.round(array[i-1]/60) ? '' : moment(l, 'X').format('HH:mm')

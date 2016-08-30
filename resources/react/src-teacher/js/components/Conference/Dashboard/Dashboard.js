@@ -8,7 +8,7 @@ import { SCHOOL_NAME } from '../../../../config/env';
 import * as DashboardActions from '../../../actions/dashboard';
 import * as LectureActions from '../../../actions/lecture';
 // Components
-import { RaisedButton } from 'material-ui';
+import { RaisedButton, Tabs, Tab, LeftNav, Toggle } from 'material-ui';
 import { Paper } from 'material-ui';
 import Colors from 'material-ui/lib/styles/colors';
 import PieCharts from './PieCharts';
@@ -24,7 +24,11 @@ class Dashboard extends Component {
     fetchCharts();
     this.state = {
       intervalId: null,
-      interval: 1000
+      interval: 10000,
+      value: 'newest',
+      rightSetting: false,
+      ReactionToggled: false,
+      MessageToggled: false,
     };
   }
 
@@ -40,6 +44,12 @@ class Dashboard extends Component {
   componentWillUnmount() {
     clearInterval(this.state.intervalId);
   }
+
+  handleChange(value) {
+    this.setState({
+      value: value,
+    });
+  };
 
   openWindow() {
     window.open(
@@ -60,8 +70,8 @@ class Dashboard extends Component {
     var effectiveTime = 60000;
 
     var reactions = charts.reactions;
-    var attendance, understood, notUnderstand;
     var timestamp = new Date().getTime();
+    var attendance, understood, notUnderstand;
 
     if (charts.exist) {
       attendance = reactions.map(r => r.auditorId).filter((r, i, self) => self.indexOf(r) === i).length,
@@ -73,10 +83,91 @@ class Dashboard extends Component {
       }).map(r => r.auditorId).filter((r, i, self) => self.indexOf(r) === i).length
     }
 
+    var imageName;
+
+    if (charts.exist) {
+      if (charts.conference.enableReaction == 1 && charts.conference.enableMessage == 1) {
+        imageName = 'reaction-message';
+      } else if (charts.conference.enableReaction == 1 && charts.conference.enableMessage == 0) {
+        imageName = 'reaction';
+      } else if (charts.conference.enableReaction == 0 && charts.conference.enableMessage == 1) {
+        imageName = 'reaction';
+      } else {
+        imageName = 'none';
+      }
+    }
+    const styles = {
+      line: {
+        backgroundColor: 'rgb(17, 25, 142)',
+        paddingTop: 16,
+        margin: '0 auto',
+        fontSize: 24,
+        fontWeight: 400,
+        textAlign: 'center',
+        color: 'white',
+      },
+      block: {
+        maxWidth: 250,
+        margin: '10px auto 50px',
+      },
+      toggle: {
+        marginBottom: 10,
+      },
+    }
+
     return (
       <div style={style}>
         <section className="content-header">
         </section>
+
+        <LeftNav width={400} openRight={true} open={this.state.rightSetting}>
+          {
+            charts.exist &&
+            <div className="cliant-setting">
+              <div style={styles.block}>
+                <Toggle
+                  label="Reaction"
+                  style={styles.toggle}
+                  toggled={charts.conference.enableReaction == 1 ? true : false}
+                  onToggle={(f, bool) => {
+                    actions.updateLectureSetting(charts.conference.id, {enableReaction: bool});
+                  }}
+                />
+                <Toggle
+                  label="Send Message"
+                  style={styles.toggle}
+                  toggled={charts.conference.enableMessage == 1 ? true : false}
+                  onToggle={(f, bool) => {
+                    actions.updateLectureSetting(charts.conference.id, {enableMessage: bool});
+                  }}
+                />
+              </div>
+              <div id="iphone5s" className="silver">
+                  <div className="device">
+                      <div className="inner"></div>
+                      <div className="sleep"></div>
+                      <div className="volume"></div>
+                      <div className="camera"></div>
+                      <div className="top-bar"></div>
+                      <div className="sensor"></div>
+                      <div className="speaker"></div>
+                      <div className="screen">
+                          <img src={`/images/teacher/${imageName}.jpeg`} alt=""/>
+                      </div>
+                      <div className="bottom-bar"></div>
+                      <div className="start"></div>
+                  </div>
+              </div>
+            </div>
+          }
+          <RaisedButton
+            style={{width: 150, marginRight: 20}}
+            label="完了"
+            backgroundColor={'rgb(0, 188, 212)'}
+            onClick={() => this.setState({rightSetting: false})}
+          />
+        </LeftNav>
+
         <section className="content">
           <div>
             <div className="row">
@@ -88,9 +179,15 @@ class Dashboard extends Component {
                     </div>
                     <RaisedButton
                       style={{width: 150, marginRight: 20, float:'right'}}
+                      label="設定"
+                      backgroundColor={'rgb(0, 188, 212)'}
+                      onClick={() => this.setState({rightSetting: true})}
+                    />
+                    <RaisedButton
+                      style={{width: 150, marginRight: 20, float:'right'}}
                       label="終了"
-                      secondary={true}
-                      onClick={() => actions.closeRoom(1)}
+                      backgroundColor={'rgb(0, 188, 212)'}
+                      onClick={() => {}}
                     />
                   </div>
                 </div>
@@ -98,7 +195,7 @@ class Dashboard extends Component {
             </div>
 
             <div className="row">
-              <div className="col-md-8">
+              <div className="col-md-7">
                 <div className="row">
                   <PieCharts pie={{
                     attendance: attendance,
@@ -115,19 +212,22 @@ class Dashboard extends Component {
                   }
                 </div>
               </div>
-              <div className="col-md-4">
-                <div className="row">
-                  <div className="col-md-6">
-                    <div className="row" style={{marginRight: 5}}>
-                      <h3>新着順</h3>
+              <div className="col-md-5">
+                <div className="row" style={{marginLeft: 10}}>
+                  <h2 style={styles.line}>メッセージ</h2>
+                  <Tabs
+                    value={this.state.value}
+                    onChange={(value) => this.setState({
+                      value: value
+                    })}
+                  >
+                    <Tab label="新着順" value="newest" >
                       <Message messages={messages} name={true}/>
-                    </div>                </div>
-                  <div className="col-md-6">
-                    <div className="row" style={{marginLeft: 5}}>
-                      <h3>高評価順</h3>
+                    </Tab>
+                    <Tab label="人気順" value="popularity">
                       <SortedMessage messages={messages} name={true}/>
-                    </div>
-                  </div>
+                    </Tab>
+                  </Tabs>
                 </div>
               </div>
             </div>

@@ -255,3 +255,33 @@ export function closeRoom(id) {
     }
   };
 }
+
+
+export function updateLectureSetting(id, body) {
+  return {
+    [CALL_API]: {
+      types: [
+        types.UPDATE_LECTURE,
+        types.UPDATE_LECTURE_SUCCESS,
+        types.UPDATE_LECTURE_FAIL
+      ],
+      endpoint: `conferences/${id}/setting`,
+      method: 'PUT',
+      body
+    },
+    meta: {
+      actionsOnSuccess: [
+        (response) => ({
+          type: REQUEST_CHARTS_SUCCESS,
+          payload: {
+            exist: true,
+            room: null,
+            conference: response.conference,
+            reactions: response.reactions,
+
+          }
+        })
+      ]
+    }
+  };
+}

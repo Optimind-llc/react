@@ -51,14 +51,6 @@ class DashboardController extends Controller
                 ];
             }),
         ], 200);
-
-        // return \Response::json([
-        //     'exist' => true,
-        //     'room' => $room,
-        //     'basic' => $basic,
-        //     'reactions' => $reactions,
-        //     'charts' => $charts
-        // ], 200);
     }
 
     /**

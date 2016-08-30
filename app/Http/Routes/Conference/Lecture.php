@@ -12,7 +12,7 @@ Route::group(['prefix' => 'room'], function() {
 	Route::get('/{id}/edit', 'LectureController@index');
 });
 
-Route::group(['prefix' => 'fetch/lectures'], function() {
+Route::group(['prefix' => 'fetch/conferences'], function() {
 	Route::get('', 'LectureController@lectures');
 	Route::get('basic', 'LectureController@basic');
 	Route::post('search', 'LectureController@search');
@@ -25,4 +25,6 @@ Route::group(['prefix' => 'fetch/lectures'], function() {
 	Route::patch('{id}/deactivate', 'LectureController@deactivate');
 	Route::delete('{id}', 'LectureController@destroy');
     Route::patch('{id}/restore', 'LectureController@restore');
+
+	Route::put('{id}/setting', 'LectureController@updateSetting');
 });

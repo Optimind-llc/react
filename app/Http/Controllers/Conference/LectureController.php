@@ -259,4 +259,38 @@ class LectureController extends Controller
     {
         return \Response::json($id, 200);
     }
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function updateSetting($id, Request $request)
+    {
+        $conference = Conference::find($id);
+
+        if (!$conference instanceof Conference) {
+            throw new ApiException('lecture.not_found');
+        }
+
+        if (isset($request->enable_reaction)) {
+            $conference->enable_reaction = $request->enable_reaction;
+        }
+
+        if (isset($request->enable_message)) {
+            $conference->enable_message = $request->enable_message;
+        }
+
+        $conference->save();
+
+        return \Response::json([
+            'exist' => true,
+            'conference' => $conference,
+            'reactions' => $conference->reactions()->get()->map(function ($item, $key) {
+                return [
+                    'auditor_id' => strval($item->auditor_id),
+                    'type' => strval($item->type),
+                    'created_at' => $item->created_at->timestamp
+                ];
+            }),
+        ], 200);
+    }
 }

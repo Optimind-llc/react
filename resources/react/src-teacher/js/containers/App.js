@@ -57,7 +57,7 @@ class App extends Component {
             <div>
               <IconMenu
                 className="header-dropdown-user"
-                iconButtonElement={<IconButton><MoreVertIcon/></IconButton>}
+                iconButtonElement={<IconButton><MoreVertIcon color={'white'}/></IconButton>}
                 targetOrigin={{horizontal: 'right', vertical: 'top'}}
                 anchorOrigin={{horizontal: 'right', vertical: 'top'}}>
                 <MenuItem
@@ -75,7 +75,7 @@ class App extends Component {
               </IconMenu>
               <IconMenu
                 id="header-dropdown-locale"
-                iconButtonElement={<IconButton><SocialPublic /></IconButton>}
+                iconButtonElement={<IconButton><SocialPublic  color={'white'}/></IconButton>}
                 targetOrigin={{horizontal: 'right', vertical: 'top'}}
                 anchorOrigin={{horizontal: 'right', vertical: 'top'}}>
                 <MenuItem

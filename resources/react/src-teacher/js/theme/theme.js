@@ -8,11 +8,11 @@ export default {
   zIndex,
   fontFamily: 'Roboto, Noto Sans JP, sans-serif',
   palette: {
-    primary1Color: Colors.indigoA100,
+    primary1Color: 'rgb(17, 25, 142)',
     primary2Color: Colors.indigo700,
     primary3Color: Colors.lightBlack,
     accent1Color: '#00BCD4',
-    accent2Color: '#9F0BE0',
+    accent2Color: Colors.indigo50,
     accent3Color: Colors.grey500,
     textColor: Colors.darkBlack,
     alternateTextColor: Colors.white,
