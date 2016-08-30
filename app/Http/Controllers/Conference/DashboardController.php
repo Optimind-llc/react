@@ -64,7 +64,7 @@ class DashboardController extends Controller
             ->messages()
             ->with('likes')
             ->where('deleted_at', null)
-            ->orderBy('created_at', 'asc')
+            ->orderBy('created_at')
             ->get()
             ->map(function ($item, $key) {
                 return [
