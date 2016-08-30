@@ -80,7 +80,7 @@ class Message extends Component {
             }}
         >
         {
-          messages.map((m, i) =>
+          messages.map((m, i, self) =>
             <div className="message-node">
               <div
                 className="likes-wrap"
@@ -117,7 +117,7 @@ class Message extends Component {
                 )}
               </div>
               <div className="message-info">
-                <div>{`No.${i+1}`}</div>
+                <div>{`No.${self.length - i}`}</div>
                 <div>{`${Math.abs(moment.unix(m.time).diff(moment(), 'minutes'))} 分前`}</div>
               </div>
             </div>
