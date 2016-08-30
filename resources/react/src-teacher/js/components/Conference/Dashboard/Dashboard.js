@@ -91,7 +91,7 @@ class Dashboard extends Component {
       } else if (charts.conference.enableReaction == 1 && charts.conference.enableMessage == 0) {
         imageName = 'reaction';
       } else if (charts.conference.enableReaction == 0 && charts.conference.enableMessage == 1) {
-        imageName = 'reaction';
+        imageName = 'message';
       } else {
         imageName = 'none';
       }
