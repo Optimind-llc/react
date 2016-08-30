@@ -53,7 +53,7 @@ class AudienceController extends Controller
             ->messages()
             ->where('deleted_at', null)
             ->with('likes')
-            ->orderBy('created_at', 'asc')
+            ->orderBy('created_at', 'desc')
             ->get()
             ->map(function ($message, $key) use (&$auditor_id) {
                 return [
