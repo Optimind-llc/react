@@ -45,7 +45,7 @@
           <a href="/nagoya-u/signin" class="work-box">
             <img src="/images/schools/nagoya-u-logo.png" alt="">
             <div class="overlay overlay-nagoya-u">
-              <div class="overlay-caption"><p>名古屋大学</p></div>
+              <div class="overlay-caption"><p>名古屋大学 様</p></div>
             </div>
           </a>
         </div>
@@ -54,7 +54,7 @@
             <img src="/images/schools/brother-logo.png" alt="">
             <div class="overlay overlay-brother">
               <div class="overlay-caption">
-                <p>brother</p>
+                <p>brother 様</p>
               </div>
             </div>
           </a>
@@ -63,7 +63,7 @@
           <a href="/conference/teacher/dashboard?connection_name=engineer" class="work-box">
             <img src="/images/schools/engineer-logo.png" alt="">
             <div class="overlay overlay-engineer">
-              <div class="overlay-caption"><p>日本技術士会</p></div>
+              <div class="overlay-caption"><p>日本技術士会 様</p></div>
             </div>
           </a>
         </div>
