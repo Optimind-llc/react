@@ -20,8 +20,8 @@ class LineChart extends Component {
     const { reactions, startAt } = this.props;
 
     //表示する時間はlineRange * interval
-    const lineRange = 1200;
-    const interval = 1;
+    const lineRange = 120;
+    const interval = 10;
     const dtl = lineRange*interval; // display time length 表示する時間の長さ
 
     const effectiveTime = 180;
@@ -30,12 +30,12 @@ class LineChart extends Component {
     let understoodDate =[];
     let notUnderstandData =[];
 
-    let startTime = moment(startAt, 'YYYY-MM-DD HH:mm:ss').unix();
-    let endTime = moment().unix();
+    let startTime = Math.round(moment(startAt, 'YYYY-MM-DD HH:mm:ss').unix() / 10)*10;
+    let endTime = Math.round(moment().unix() / 10)*10;
 
     const fakeCosCoef = [];
 
-    for (let i = effectiveTime/2; i >= 0; i--) {
+    for (let i = effectiveTime/2; i >= 0; i=i-10) {
       fakeCosCoef[i] = 100*Math.cos(i*Math.PI/effectiveTime);
       // fakeCosCoef[i] = Math.round(100*(1 - (l*2/effectiveTime)))
     }
@@ -51,28 +51,29 @@ class LineChart extends Component {
 
       for (var j = reactions.length - 1; j >= 0; j--) {
         let r = reactions[j];
-        let l = Math.abs(Number(r.createdAt) - Ti);
-        let a = l >= effectiveTime/2 ? 0 : fakeCosCoef[l];
 
-        let Ar;
-        switch (r.type){
-          case "1":
-            Ar = Ac[Number(r.auditorId)];
-            Ac[Number(r.auditorId)] = typeof Ar === 'undefined' ? a : Ar+a > 100 ? 100 : Ar+a;
-            break;
-          case "2":
-            Ar = Ai[Number(r.auditorId)];
-            Ai[Number(r.auditorId)] = typeof Ar === 'undefined' ? a : Ar+a > 100 ? 100 : Ar+a;
-            break;
-        }
+        // if (r.type !== 0) {
+          let l = Math.abs(Math.round(Number(r.createdAt)/10)*10 - Ti);
+          let a = l >= effectiveTime/2 ? 0 : fakeCosCoef[l];
+
+          let Ar;
+          switch (r.type){
+            case "1":
+              Ar = Ac[Number(r.auditorId)];
+              Ac[Number(r.auditorId)] = typeof Ar === 'undefined' ? a : Ar+a > 100 ? 100 : Ar+a;
+              break;
+            case "2":
+              Ar = Ai[Number(r.auditorId)];
+              Ai[Number(r.auditorId)] = typeof Ar === 'undefined' ? a : Ar+a > 100 ? 100 : Ar+a;
+              break;
+          }
+        // }
       }
 
       let numberOfStudents = reactions
         .map(r => r.auditorId)
         .filter((r, i, self) => self.indexOf(r) === i)
         .length;
-
-// console.log('numberOfStudents = ', numberOfStudents);
 
       switch (Ac.length){
         case 0:
@@ -98,8 +99,6 @@ class LineChart extends Component {
           break;
       }
     }
-
-// console.log(understoodDate);
 
     let nextLabel = labels.map((l, i, array) => {
       return Math.round(l/60) === Math.round(array[i-1]/60) ? '' : moment(l, 'X').format('HH:mm')
