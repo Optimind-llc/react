@@ -19,8 +19,11 @@ class LineChart extends Component {
   render() {
     const { reactions, startAt } = this.props;
 
-    const lineRange = 120;
-    const interval = 10;
+    //表示する時間はlineRange * interval
+    const lineRange = 1200;
+    const interval = 1;
+    const dtl = lineRange*interval; // display time length 表示する時間の長さ
+
     const effectiveTime = 180;
 
     let labels = [];
@@ -30,10 +33,16 @@ class LineChart extends Component {
     let startTime = moment(startAt, 'YYYY-MM-DD HH:mm:ss').unix();
     let endTime = moment().unix();
 
-    for (let i = 0; i <= lineRange; i++) {
-      let Ti = endTime - startTime > interval*lineRange ?
-        (endTime - interval*lineRange + interval*i) :
-        startTime + interval*i;
+    const fakeCosCoef = [];
+
+    for (let i = effectiveTime/2; i >= 0; i--) {
+      fakeCosCoef[i] = 100*Math.cos(i*Math.PI/effectiveTime);
+      // fakeCosCoef[i] = Math.round(100*(1 - (l*2/effectiveTime)))
+    }
+
+    //最小目盛りごとの値を計算する
+    for (let i = 0; i <= lineRange - 1; i++) {
+      let Ti = endTime - startTime > dtl ? (endTime - dtl + interval*i) : startTime + interval*i;
 
       labels[i] = Ti;
 
@@ -43,19 +52,17 @@ class LineChart extends Component {
       for (var j = reactions.length - 1; j >= 0; j--) {
         let r = reactions[j];
         let l = Math.abs(Number(r.createdAt) - Ti);
-
-        // let a = l >= effectiveTime/2 ? 0 : Math.round(100*(1 - (l*2/effectiveTime)));
-        let a = l >= effectiveTime/2 ? 0 : 100*Math.cos(l*Math.PI/effectiveTime);
+        let a = l >= effectiveTime/2 ? 0 : fakeCosCoef[l];
 
         let Ar;
-        switch (Number(r.type)){
-          case 1:
+        switch (r.type){
+          case "1":
             Ar = Ac[Number(r.auditorId)];
-            Ac[Number(r.auditorId)] = typeof Ar === 'undefined' ? Number(a) : Number(Ar) + Number(a) > 100 ? 100 : Number(Ar) + Number(a);
+            Ac[Number(r.auditorId)] = typeof Ar === 'undefined' ? a : Ar+a > 100 ? 100 : Ar+a;
             break;
-          case 2:
+          case "2":
             Ar = Ai[Number(r.auditorId)];
-            Ai[Number(r.auditorId)] = typeof Ar === 'undefined' ? Number(a) : Number(Ar) + Number(a) > 100 ? 100 : Number(Ar) + Number(a);
+            Ai[Number(r.auditorId)] = typeof Ar === 'undefined' ? a : Ar+a > 100 ? 100 : Ar+a;
             break;
         }
       }
