@@ -137,8 +137,8 @@ class LineChart extends Component {
     const chartOptions = {
       scaleShowGridLines : true,
       bezierCurve : true,
-      bezierCurveTension : 0.2,
-      animation : false,
+      bezierCurveTension : 0.4,
+      animation : true,
       // scaleShowHorizontalLines: true, //水平メモリ
       // scaleShowVerticalLines: true, //垂直メモリ
       scaleOverride : true,
