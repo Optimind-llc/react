@@ -36,8 +36,8 @@ class LineChart extends Component {
     const fakeCosCoef = [];
 
     for (let i = effectiveTime/2; i >= 0; i=i-10) {
-      fakeCosCoef[i] = 100*Math.cos(i*Math.PI/effectiveTime);
-      // fakeCosCoef[i] = Math.round(100*(1 - (l*2/effectiveTime)))
+      // fakeCosCoef[i] = 100*Math.cos(i*Math.PI/effectiveTime);
+      fakeCosCoef[i] = Math.round(100*(1 - (i*2/effectiveTime)))
     }
 
     //最小目盛りごとの値を計算する
