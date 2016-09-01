@@ -24,7 +24,7 @@ class LineChart extends Component {
     const interval = 10;
     const dtl = lineRange*interval; // display time length 表示する時間の長さ
 
-    const effectiveTime = 180;
+    const effectiveTime = 120;
 
     let labels = [];
     let understoodDate =[];
