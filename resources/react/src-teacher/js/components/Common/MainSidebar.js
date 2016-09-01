@@ -76,8 +76,8 @@ class MainSidebar extends Component {
       },
     };
     const path = {
-      dashboard: `/${SCHOOL_NAME}/teacher/dashboard?connection=${CONNECTION_NAME}`,
-      lecture: `/${SCHOOL_NAME}/teacher/lectures/?connection=${CONNECTION_NAME}`,
+      dashboard: `/${SCHOOL_NAME}/teacher/dashboard?connection_name=${CONNECTION_NAME}`,
+      lecture: `/${SCHOOL_NAME}/teacher/lectures/?connection_name=${CONNECTION_NAME}`,
       // user: `/${SCHOOL_NAME}/teacher/user`,
     };
 
