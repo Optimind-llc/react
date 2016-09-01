@@ -52,14 +52,12 @@ class PieChart extends Component {
       <div className="row space-top-4" id="pie-wrap">
         <div className="col-md-6">
           <p className="h4 text-center space-top-0">Understood</p>
-          <div className="pie-chart">
-            <DoughnutChart
-              data={understood}
-              options={chartOptions}
-              width="200"
-              height="200"
-            />
-          <div>
+          <DoughnutChart
+            data={understood}
+            options={chartOptions}
+            width="200"
+            height="200"
+          />
           <div className="chart-center">
             <p>
               <span style={{color: `rgba(${colors.understood},1)`}}>{pie.understood}</span>
@@ -71,14 +69,13 @@ class PieChart extends Component {
 
         <div className="col-md-6">
           <p className="h4 text-center space-top-0">Not Understand</p>
-          <div className="pie-chart">
-            <DoughnutChart
-              data={notUnderstand}
-              options={chartOptions}
-              width="200"
-              height="200"
-            />
-          </div>
+          <DoughnutChart
+            data={notUnderstand}
+            options={chartOptions}
+            width="200"
+            height="200"
+
+          />
           <div className="chart-center">
             <p>
               <span style={{color: `rgba(${colors.notUnderstand},1)`}}>{pie.notUnderstand}</span>

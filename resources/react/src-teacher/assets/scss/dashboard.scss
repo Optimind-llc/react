@@ -129,14 +129,15 @@
 	div {
 		position: relative;
 
-		.pie-chart {
+		canvas {
           position: absolute;
           top: 250px;
           left: 0;
           right: 0;
           bottom: 0;
           margin: auto;
-          height: 100%;
+          width: 200px;
+          height: 200px;
 		}
 
 		div.chart-center {
