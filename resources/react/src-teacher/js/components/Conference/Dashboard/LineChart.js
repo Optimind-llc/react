@@ -38,7 +38,6 @@ class LineChart extends Component {
     for (let i = effectiveTime/2; i >= 0; i=i-10) {
       // fakeCosCoef[i] = 100*Math.cos(i*Math.PI/effectiveTime);
       // fakeCosCoef[i] = Math.round(100*(1 - (i*2/effectiveTime)));
-      fakeCosCoef[i] = 100;
     }
 
     //最小目盛りごとの値を計算する
@@ -53,9 +52,10 @@ class LineChart extends Component {
       for (var j = reactions.length - 1; j >= 0; j--) {
         let r = reactions[j];
 
-        // if (r.type !== 0) {
+        if (r.type !== 0) {
           let l = Math.abs(Math.round(Number(r.createdAt)/10)*10 - Ti);
-          let a = l >= effectiveTime/2 ? 0 : fakeCosCoef[l];
+          // let a = l >= effectiveTime/2 ? 0 : fakeCosCoef[l];
+          let a = l >= effectiveTime/2 ? 0 : 100;
 
           let Ar;
           switch (r.type){
@@ -68,7 +68,7 @@ class LineChart extends Component {
               Ai[Number(r.auditorId)] = typeof Ar === 'undefined' ? a : Ar+a > 100 ? 100 : Ar+a;
               break;
           }
-        // }
+        }
       }
 
       let numberOfStudents = reactions

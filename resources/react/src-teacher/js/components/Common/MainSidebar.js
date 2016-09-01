@@ -76,9 +76,9 @@ class MainSidebar extends Component {
       },
     };
     const path = {
-      dashboard: `/${SCHOOL_NAME}/teacher/dashboard`,
-      lecture: `/${SCHOOL_NAME}/teacher/lectures`,
-      user: `/${SCHOOL_NAME}/teacher/user`,
+      dashboard: `/${SCHOOL_NAME}/teacher/dashboard?connection=${CONNECTION_NAME}`,
+      lecture: `/${SCHOOL_NAME}/teacher/lectures/?connection=${CONNECTION_NAME}`,
+      // user: `/${SCHOOL_NAME}/teacher/user`,
     };
 
     return (
@@ -108,14 +108,6 @@ class MainSidebar extends Component {
           }
           innerDivStyle={styles.innerDiv}
           leftIcon={<EditorInsertChart style={styles.icon}/>}
-        />
-        <ListItem
-          value={path.user}
-          primaryText={
-            <FormattedMessage id="nav.user">text</FormattedMessage>
-          }
-          innerDivStyle={styles.innerDiv}
-          leftIcon={<AccountBox style={styles.icon}/>}
         />
       </SelectableList>
     )
