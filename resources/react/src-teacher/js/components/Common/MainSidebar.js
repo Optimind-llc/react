@@ -101,14 +101,6 @@ class MainSidebar extends Component {
           innerDivStyle={styles.innerDiv}
           leftIcon={<Dashboard style={styles.icon}/>}
         />
-        <ListItem
-          value={path.lecture}
-          primaryText={
-            <FormattedMessage id="nav.lecture">text</FormattedMessage>
-          }
-          innerDivStyle={styles.innerDiv}
-          leftIcon={<EditorInsertChart style={styles.icon}/>}
-        />
       </SelectableList>
     )
   }
