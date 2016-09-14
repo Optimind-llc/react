@@ -45,7 +45,15 @@ class DashboardController extends Controller
     {
         // $user = \Auth::guard('sponsor')->user();
         $user = User::where('corporate_name', $request->connection_name)->firstOrFail();
-        $conference = $user->conferences()->firstOrFail();
+        $conference = $user->conferences()->where('status', 1)->first();
+
+        if (!$conference instanceof Conference) {
+            return \Response::json([
+                'exist' => false,
+                'conference' => null,
+                'reactions' => null
+            ], 200);
+        }
 
         return \Response::json([
             'exist' => true,
@@ -66,7 +74,7 @@ class DashboardController extends Controller
     public function message(Request $request)
     {
         $user = User::where('corporate_name', $request->connection_name)->firstOrFail();
-        $conference = $user->conferences()->where('status', 1)->first;
+        $conference = $user->conferences()->where('status', 1)->first();
 
         if (!$conference) {
             return \Response::json([], 200);

@@ -117,8 +117,7 @@ class Dashboard extends Component {
 
     return (
       <div style={style}>
-        <section className="content-header">
-        </section>
+        <section className="content-header"></section>
 
         <LeftNav width={400} openRight={true} open={this.state.rightSetting}>
           {
@@ -176,6 +175,12 @@ class Dashboard extends Component {
         </LeftNav>
 
         <section className="content">
+        {!charts.exist ?
+          <div className="panel">
+            <div className="panel-body">
+              <h4 className="text-center">開講中のルームがありません</h4>
+            </div>
+          </div> :
           <div>
             <div className="row">
               <div className="panel panel-default room-info-wrap">
@@ -239,6 +244,7 @@ class Dashboard extends Component {
               </div>
             </div>
           </div>
+        }
         </section>
       </div>
     );
