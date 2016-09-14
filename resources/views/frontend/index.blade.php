@@ -22,7 +22,7 @@
 <!--           <li><a href="#features">Features</a></li>
  -->          <li><a href="#screens">Screenshots</a></li>
 <!--           <li><a href="#contact">Contact</a></li>
- -->          <li><a href="/schools">学校関係者の方</a></li>
+ -->          <li><a href="/schools">関係者の方</a></li>
         </ul>
       </nav>
       <a href="#" class="nav-toggle">Menu<span></span></a>
@@ -64,12 +64,12 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 col-md-offset-2 text-center">
-        <h2 class="section-title">学生に反応を促し、学生の心の声をリアルタイムで教員に伝えられる</h2>
+        <h2 class="section-title">反応を促し、声をリアルタイムで伝えられる</h2>
         <p class="section-intro">
           Re:actを用いると、大学や講演会など大人数の講義において学生や聴講者の反応をリアルタイムで教師または講演者に伝えることが出来ます。
           <br/>
           <br/>
-          聴講者はRe:actを通して「分からん」「いいね」「う～ん」の反応と、メッセージを送信でき、
+          聴講者はRe:actを通して「なるほど」「わからない」の反応と、メッセージを送信でき、
           周りの目を気にして「恥ずかしい」「講義の妨げになるのではないか」と、人前で手を上げて発言できない日本人のためのアプリです。
         </p>
       </div>
@@ -93,118 +93,23 @@
       <div class="col-md-4 col-sm-12 "> <span class="icon icon-lifesaver"></span>
         <div class="overview-content">
           <h4>使いやすいデザイン</h4>
-          <p>少ない操作で利用できるので授業の妨げになりません。</p>
+          <p>少ない操作で利用できるので授業や講演の妨げになりません。</p>
         </div>
       </div>
     </div>
   </div>
 </section>
-<!-- overview section --> 
-<!-- feature section 1 -->
-<!-- <section id="features" class="section features1">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2 text-center">
-        <h2 class="section-title">We Offers A Wide Range Of <span>Features</span></h2>
-        <p class="section-intro">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae. </p>
-      </div>
-    </div>
-    <div class="row features1-content-space">
-      <div class="col-md-3 col-sm-12">
-        <div class="features1-content left"> <span class="icon icon-upload"></span>
-          <h4>Light Weight</h4>
-          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium demque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore </p>
-        </div>
-        <div class="features1-content left"> <span class="icon icon-tools"></span>
-          <h4>Creatively Design</h4>
-          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium demque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore </p>
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-12">
-
-<div id="iphone5s" class="silver">
-  <div class="device">
-    <div class="inner"></div>
-    <div class="sleep"></div>
-    <div class="volume"></div>
-    <div class="camera"></div>
-    <div class="top-bar"></div>
-    <div class="sensor"></div>
-    <div class="speaker"></div>
-    <div class="screen">
-      <img src="./img/gallery/screen-1.jpg" alt="">
-    </div>
-    <div class="bottom-bar"></div>
-    <div class="start"></div>
-  </div>
-</div>
-
-      </div>
-      <div class="col-md-3 col-sm-12">
-        <div class="features1-content right"> <span class="icon icon-speedometer"></span>
-          <h4>Boost performance</h4>
-          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium demque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore </p>
-        </div>
-        <div class="features1-content right"> <span class="icon icon-camera"></span>
-          <h4>Flexible Layouts</h4>
-          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium demque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
-<!-- feature section 1 --> 
-
-<!-- feature section 2 -->
-<!-- <section id="features" class="section features2">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6" style="float:right;">
-        <div class="features2-content">
-          <h2 class="section-title">Completely flexible, create the landing page <span>you want</span></h2>
-          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. </p>
-          <ul>
-            <li><i class="fa fa-check"></i> わからないと思ったらボタンをクリック </li>
-            <li><i class="fa fa-check"></i> メッセージの送信も可能 </li>
-            <li><i class="fa fa-check"></i> doloremque laudantium, totam rem aperiam.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-6"> <img class="img-responsive" src="images/feature-screen2.png"> </div>
-    </div>
-  </div>
-</section> -->
-<!-- feature section 2 --> 
-
-<!-- feature section 3 -->
-<!-- <section id="features" class="section features3">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="features2-content">
-          <h2 class="section-title">Super flexible and very easy to modify your <span>app screen</span></h2>
-          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. </p>
-          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-        </div>
-      </div>
-      <div class="col-md-6"> <img class="img-responsive" src="images/feature-screen3.png"> </div>
-    </div>
-  </div>
-</section> -->
-<!-- feature section 3 --> 
 
 <!-- screen shots slider section-->
-<section id="screens" class="section features1">
+<!-- <section id="screens" class="section features1">
   <div class="container">
     <div class="row">
       <div class="col-md-8 col-md-offset-2 text-center">
         <h2 class="section-title">iPhone Android 両端末向けにアプリを公開<span></span></h2>
         <br/>
-<!--         <p class="section-intro">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae. </p>
- -->      </div>
+      </div>
     </div>
   </div>
-  <!-- owl-carousel starts -->
   <div id="owl-demo" class="owl-carousel">
     <div class="item"><img width="281" height="500" src="images/app-screen/1.png"></div>
     <div class="item"><img width="281" height="500" src="images/app-screen/2.png"></div>
@@ -217,33 +122,8 @@
     <div class="item"><img width="281" height="500" src="images/app-screen/4.png"></div>
     <div class="item"><img width="281" height="500" src="images/app-screen/5.png"></div>
   </div>
-  <!-- owl-carousel starts --> 
-</section>
-<!-- screen shots slider section --> 
-
-<!--contact section -->
-<!-- <section id="contact" class="section text-center">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2 ">
-        <h2 class="section-title">Get In Touch <span>Say Hello!</span></h2>
-        <p class="section-intro">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae. </p>
-      </div>
-    </div>
-    
-    <div class="col-md-6 col-md-offset-3 conForm">
-      <div id="message"></div>
-      <form method="post" action="php/contact.php" name="cform" id="cform">
-        <input name="name" id="name" type="text" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" placeholder="Your name..." >
-        <input name="email" id="email" type="email" class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 noMarr" placeholder="Email Address..." >
-        <textarea name="comments" id="comments" cols="" rows="" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" placeholder="Project Details..."></textarea>
-        <input type="submit" id="submit" name="send" class="submitBnt" value="Send">
-        <div id="simple-msg"></div>
-      </form>
-    </div>
-  </div>
 </section> -->
-<!--contact section --> 
+<!-- screen shots slider section --> 
 
 @include('frontend.includes.footer')
 
