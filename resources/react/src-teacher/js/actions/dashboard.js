@@ -31,10 +31,10 @@ export function fetchMessages() {
       endpoint: (state) => {
         const messages = state.dashboardMessages.dashboardMessages;
         if (messages.length === 0) {
-          return 'messages/?latest=0'
+          return `messages/?latest=0&connection_name=${CONNECTION_NAME}`
         }
         else {
-          return `messages/?latest=${messages[0].time}`
+          return `messages/?latest=${messages[0].time}&connection_name=${CONNECTION_NAME}`
         }
       },
       method: 'GET',
