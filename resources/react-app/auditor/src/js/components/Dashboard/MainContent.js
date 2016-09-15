@@ -23,7 +23,7 @@ class MainContent extends Component {
 
     this.state = {
       intervalId: null,
-      interval: 1000,
+      interval: 15000,
       innerHeight: window.innerHeight
     };
   }

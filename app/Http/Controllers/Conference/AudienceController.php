@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Conference;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+// Exceptions
+use App\Exceptions\ApiException;
 //Models
 use App\Models\Student\Student;
 use App\Models\Conference\User;
@@ -14,8 +16,6 @@ use App\Models\Conference\Like;
 use App\Models\Conference\Reaction;
 //Requests
 use Illuminate\Http\Request;
-//Exceptions
-use App\Exceptions\ApiException;
 
 /**
  * Class AudienceController
@@ -26,10 +26,8 @@ class AudienceController extends Controller
     protected function getConference($id)
     {
         $conference = Conference::find($id);
-        if (!$conference instanceof Conference) {
-            return \Response::json([
-                'message' => 'Conference not found'
-            ], 400);
+        if (!$conference) {
+            throw new ApiException('Conference not found');
         }
 
         return $conference;
@@ -39,9 +37,7 @@ class AudienceController extends Controller
     {
         $auditor = Student::where('api_token', $token)->first();
         if (!$auditor instanceof Student) {
-            return \Response::json([
-                'message' => 'Auditor not found'
-            ], 400);
+            throw new ApiException('Auditor not found');
         }
 
         return $auditor;
@@ -132,9 +128,9 @@ class AudienceController extends Controller
         ], 200);
     }
 
-    public function conference()
+    public function conference($id)
     {
-        $conference = Conference::first();
+        $conference = $this->getConference($id);
 
         return \Response::json([
             'conference' => $conference
@@ -150,7 +146,7 @@ class AudienceController extends Controller
         $reactions = $this->getReactions($conference->id, $auditor->id);
 
         return \Response::json([
-            'setting' => $conference->first(['enable_message', 'enable_like', 'enable_reaction']),
+            'setting' => $conference,
             'messages' => $messages,
             'reactions' => $reactions,
         ], 200);
@@ -174,7 +170,7 @@ class AudienceController extends Controller
         $reactions = $this->getReactions($conference->id, $auditor->id);
 
         return \Response::json([
-            'setting' => $conference->first(['enable_message', 'enable_like', 'enable_reaction']),
+            'setting' => $conference,
             'messages' => $messages,
             'reactions' => $reactions,
         ], 200);
@@ -208,7 +204,7 @@ class AudienceController extends Controller
         $reactions = $this->getReactions($conference->id, $auditor->id);
 
         return \Response::json([
-            'setting' => $conference->first(['enable_message', 'enable_like', 'enable_reaction']),
+            'setting' => $conference,
             'messages' => $messages,
             'reactions' => $reactions,
         ], 200);
@@ -237,7 +233,7 @@ class AudienceController extends Controller
         $reactions = $this->getReactions($conference->id, $auditor->id);
 
         return \Response::json([
-            'setting' => $conference->first(['enable_message', 'enable_like', 'enable_reaction']),
+            'setting' => $conference,
             'messages' => $messages,
             'reactions' => $reactions,
         ], 200);
@@ -261,7 +257,7 @@ class AudienceController extends Controller
         $reactions = $this->getReactions($conference->id, $auditor->id);
 
         return \Response::json([
-            'setting' => $conference->first(['enable_message', 'enable_like', 'enable_reaction']),
+            'setting' => $conference,
             'messages' => $messages,
             'reactions' => $reactions,
         ], 200);

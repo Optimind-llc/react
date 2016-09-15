@@ -47,7 +47,7 @@ class Dashboard extends Component {
       <FlatButton
         label="Enter"
         primary={true}
-        disabled={conference.isFetching || (conference.conference !== null && conference.conference.status == 0)}
+        disabled={conference.didInvalidate || conference.isFetching || (conference.conference !== null && conference.conference.status == 0)}
         onClick={() => {
           this.setState({open: false});
           this.sendReaction(0);
@@ -77,7 +77,10 @@ class Dashboard extends Component {
               <Loading/>
             </div>
           }
-          <ConfirmConference conference={conference}/>
+          {conference.didInvalidate ?
+            <p>エラー</p> :
+            <ConfirmConference conference={conference}/>
+          }
         </Dialog>
         {!this.state.open &&
           <div className="main-content">
@@ -109,33 +112,35 @@ class Dashboard extends Component {
                   Re:act
                 </h1>
               </div>
-              <div
-                style={{
-                  position: 'absolute',
-                  bottom: 5,
-                  right: 10,
-                  margin: 0,
-                  backgroundColor: 'rgba(63, 81, 181, 0)',
-                }}
-              >
-                <p 
+              {conference.conference.title !== "人工知能技術の正しい知識と実態" &&
+                <div
                   style={{
-                    float: 'left',
-                    margin: '5px 5px 0 0',
-                    fontSize: 10,
-                    lineHeight: '10px',
-                    textAlign: 'right',
-                    color: 'rgba(255,255,255,.5)',
+                    position: 'absolute',
+                    bottom: 5,
+                    right: 10,
+                    margin: 0,
+                    backgroundColor: 'rgba(63, 81, 181, 0)',
                   }}
                 >
-                  Supported by
-                </p>
-                <img
-                  style={{ float: 'left' }}
-                  src="/images/audience/brother-logo.png"
-                  height="15px"
-                />
-              </div>
+                  <p 
+                    style={{
+                      float: 'left',
+                      margin: '5px 5px 0 0',
+                      fontSize: 10,
+                      lineHeight: '10px',
+                      textAlign: 'right',
+                      color: 'rgba(255,255,255,.5)',
+                    }}
+                  >
+                    Supported by
+                  </p>
+                  <img
+                    style={{ float: 'left' }}
+                    src="/images/audience/brother-logo.png"
+                    height="15px"
+                  />
+                </div>
+              }
             </Paper>
             <Paper
               className="sub-header"
@@ -158,7 +163,7 @@ class Dashboard extends Component {
                     float: 'left',
                     marginLeft: 15,
                     marginBottom: 0,
-                    fontSize: 12,
+                    fontSize: 10,
                     color: 'rgba(17,25,142,1)',
                   }}
                 >
@@ -169,7 +174,7 @@ class Dashboard extends Component {
                     float: 'right',
                     marginRight: 15,
                     marginBottom: 0,
-                    fontSize: 12,
+                    fontSize: 10,
                     color: 'rgba(17,25,142,1)',
                   }}
                 >
@@ -181,7 +186,7 @@ class Dashboard extends Component {
                 <p 
                   style={{
                     float: 'none',
-                    fontSize: 18,
+                    fontSize: 12,
                     width: '100%',
                     textAlign: 'center',
                     color: 'rgba(17,25,142,1)',
