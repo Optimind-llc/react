@@ -32,7 +32,8 @@ export default class Reaction extends Component {
     return (
       <div className={enableMessage == 1 ? "reaction-wrap enable-message" : "reaction-wrap"}>
         <p>- Please tap the following two buttons to react.</p>
-        <p>- Your reaction is anonymous.</p>
+        <p>- 以下の２つのボタンを押してください</p>
+        <p>- あなたの反応は全て匿名です</p>
         <div
           className="reaction-button-understood"
           onClick={() => this.sendReaction(1)}
