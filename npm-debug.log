@@ -16,7 +16,7 @@
 4 verbose stack     at /Users/shiichi/.nodebrew/node/v6.3.1/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:78:16
 4 verbose stack     at tryToString (fs.js:455:3)
 4 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:442:12)
-5 verbose cwd /Users/shiichi/workspace/develop/laravel-prod-image/data/volume/web
+5 verbose cwd /Users/shiichi/workspace/develop/laravel-prod-image/data/react
 6 error Darwin 15.5.0
 7 error argv "/Users/shiichi/.nodebrew/node/v6.3.1/bin/node" "/Users/shiichi/.nodebrew/current/bin/npm" "run" "build:t"
 8 error node v6.3.1

@@ -122,23 +122,6 @@ class Dashboard extends Component {
                     backgroundColor: 'rgba(63, 81, 181, 0)',
                   }}
                 >
-                  <p 
-                    style={{
-                      float: 'left',
-                      margin: '5px 5px 0 0',
-                      fontSize: 10,
-                      lineHeight: '10px',
-                      textAlign: 'right',
-                      color: 'rgba(255,255,255,.5)',
-                    }}
-                  >
-                    Supported by
-                  </p>
-                  <img
-                    style={{ float: 'left' }}
-                    src="/images/audience/brother-logo.png"
-                    height="15px"
-                  />
                 </div>
               }
             </Paper>
@@ -228,3 +211,22 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+
+
+                  // <p 
+                  //   style={{
+                  //     float: 'left',
+                  //     margin: '5px 5px 0 0',
+                  //     fontSize: 10,
+                  //     lineHeight: '10px',
+                  //     textAlign: 'right',
+                  //     color: 'rgba(255,255,255,.5)',
+                  //   }}
+                  // >
+                  //   Supported by
+                  // </p>
+                  // <img
+                  //   style={{ float: 'left' }}
+                  //   src="/images/audience/brother-logo.png"
+                  //   height="15px"
+                  // />
