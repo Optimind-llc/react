@@ -1,0 +1,224 @@
+#container {
+  height: 100%;
+
+  .dashboard-wrap {
+    height: 100%;
+
+    .header {
+      width: 100%;
+      height: 80px;
+      background-color: #F4ED2F;
+      padding: 6px;
+
+      img {
+        display: block;
+        margin: auto;
+        height: 100%;
+        width: auto;
+      }
+    }
+
+    .vote-body {
+      height: calc(100% - 80px);
+      background-color: #F4ED2F;
+
+      .info {
+        padding: 7px 0;
+        background-color: #FFF;
+
+        h2 {
+          text-align: center;
+          font-size: 18px;
+          margin: 0 0 5px 0;
+        }
+
+        ul {
+          font-size: 12px;
+          margin: 0;
+        }
+
+        div.divider {
+          margin: 8px 20px;
+          height: 1px;
+          background: #DADADA;
+        }
+
+        p {
+          margin: 0;
+          font-size: 16px;
+          text-align: center;
+
+          span {
+            margin: 0 6px 0 2px;
+            font-size: 22px;
+            color: #E1510D;
+          }
+
+          &:before {
+            content: url(/images/tongari/vote.svg);
+            display: inline-block;
+            margin-right: 16px;
+            height: auto;
+            width: 12px;
+            position: relative;
+            top: 1px;
+            left: -2px;
+          }
+        }
+      }
+
+      .vote-wrap {
+        height: calc(100% - 120px - 38px);
+        overflow: scroll;
+        overflow-scrolling: touch;
+
+        .vote {
+
+          .entry {
+            margin: 10px 4px;
+            padding: 4px;
+            height: 60px;
+            border: 1px solid #DADADA;
+            border-radius: 4px;
+            background-color: #FFF;
+
+            img {
+              float: left;
+              height: 52px;
+              width: 52px;
+            }
+
+            .introduction {
+              float: left;
+              margin-left: 10px;
+
+              p.team {
+                margin: 2px 0 6px 0; 
+                font-size: 12px;
+              }
+
+              p.title {
+                margin: 0;
+                font-size: 16px;
+              }
+            }
+
+            .vote-btn-wrap {
+              float: right;
+              position: relative;
+              height: 52px;
+              width: 40px;
+
+              .votes {
+                position: absolute;
+                top: 9px;
+                right: 4px;
+                width: 32px;
+                height: 32px;
+                border: 1px solid #E1510D;
+                border-radius: 16px;
+
+                p {
+                  margin: 0;
+                  font-size: 16px;
+                  text-align: center;
+                  line-height: 32px;
+                  color: #E1510D;
+
+                  span {
+                    margin-left: 1px;
+                    font-size: 8px;
+                  }
+                }
+
+                .add {
+                  position: absolute;
+                  top: -23px;
+                  left: 5px;
+                  width: 0;
+                  height: 0;
+                  border: 10px solid transparent;
+                  border-bottom: 10px solid #E1510D;
+
+                  &.disabled {
+                    pointer-events: none;
+                    border-bottom: 10px solid #FFF4EE;
+                  }
+                }
+
+                .sub {
+                  position: absolute;
+                  bottom: -23px;
+                  left: 5px;
+                  width: 0;
+                  height: 0;
+                  border: 10px solid transparent;
+                  border-top: 10px solid #E1510D;
+
+                  &.disabled {
+                    pointer-events: none;
+                    border-top: 10px solid #FFF4EE;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .send {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          height: 38px;
+          width: 100%;
+          background-color: #FFF;
+
+          button {
+            display: block;
+            position: absolute;
+            left: calc(50% - 26px);
+            top: -16px;
+            height: 52px;
+            width: 52px;
+            background-color: #E1510D;
+            border: 3px solid #FFF;
+            border-radius: 26px;
+
+            p {
+              margin: 0;
+              font-size: 16px;
+              text-align: center;
+              color: #FFF;
+            }
+
+            &.disabled {
+              background-color: #FFD9C8;
+              pointer-events: none;
+            }
+          }
+        }
+      }
+    }
+
+    .comment-body {
+      height: calc(100% - 80px);
+      background-color: #F4ED2F;
+
+      .info {
+        padding: 7px 0;
+        background-color: #FFF;
+
+        h2 {
+          text-align: center;
+          font-size: 18px;
+          margin: 0 0 5px 0;
+        }
+
+        ul {
+          font-size: 12px;
+          margin: 0;
+        }
+      }
+    }
+  }
+}

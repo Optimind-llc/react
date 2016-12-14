@@ -75,3 +75,8 @@ Route::group(['namespace' => 'Teacher', 'prefix' => '/{school}/teacher', 'middle
     require (__DIR__ . '/Routes/Teacher/Room.php');
     require (__DIR__ . '/Routes/Teacher/User.php');
 });
+
+
+Route::get('tongari/vote', 'Tongari\TongariController@index');
+Route::post('tongari/vote', 'Tongari\TongariController@vote');
+
