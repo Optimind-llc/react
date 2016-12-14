@@ -68,7 +68,24 @@ class TongariController extends Controller
         $message = new Message;
         $message->conference_id = 7;
         $message->auditor_id = $auditor->id;
-        $message->text = $request->votes;
+        $message->text = json_encode($request->votes);
+        $message->created_at = $now;
+        $message->updated_at = $now;
+        $message->save();
+
+        return \Response::json([
+            'message' => 'success'
+        ], 200);
+    }
+
+    public function sendMessage(Request $request) {
+        $now = Carbon::now();
+        $auditor = $this->getAuditor($request->id);
+
+        $message = new Message;
+        $message->conference_id = 7;
+        $message->auditor_id = $auditor->id;
+        $message->text = json_encode($request->message);
         $message->created_at = $now;
         $message->updated_at = $now;
         $message->save();

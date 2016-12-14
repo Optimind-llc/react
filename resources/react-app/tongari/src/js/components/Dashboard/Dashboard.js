@@ -22,8 +22,16 @@ class Dashboard extends Component {
     actions.vote({votes: votes, id: application.auditorCode});
   }
 
+  sendMessage(message) {
+    const { application, actions } = this.props;
+    actions.sendMessage({
+      message: message,
+      id: application.auditorCode
+    });
+  }
+
   render() {
-    const { application } = this.props
+    const { application, message } = this.props
     const entries = [
       {id: 1, team: 'チーム名①', title: 'アイデアのタイトル①'},
       {id: 2, team: 'チーム名②', title: 'アイデアのタイトル②'},
@@ -44,6 +52,8 @@ class Dashboard extends Component {
           application.voted ?
           <Comment
             entries={entries}
+            message={message.message}
+            sendMessage={(message) => this.sendMessage(message)}
           /> :
           <Vote
             entries={entries}
@@ -61,7 +71,8 @@ Dashboard.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    application: state.application
+    application: state.application,
+    message: state.message,
   };
 }
 

@@ -33,60 +33,15 @@ export function vote(body) {
   };
 }
 
-export function sendMessages(body) {
+export function sendMessage(body) {
   return {
     [CALL_API]: {
       types: [
-        types.SEND_MESSAGES,
-        types.SEND_MESSAGES_SUCCESS,
-        types.SEND_MESSAGES_FAIL
+        types.SEND_MESSAGE,
+        types.SEND_MESSAGE_SUCCESS,
+        types.SEND_MESSAGE_FAIL
       ],
-      endpoint: 'messages/send',
-      method: 'POST',
-      body
-    }
-  };
-}
-
-export function sendLike(body) {
-  return {
-    [CALL_API]: {
-      types: [
-        types.SEND_LIKE,
-        types.SEND_LIKE_SUCCESS,
-        types.SEND_LIKE_FAIL
-      ],
-      endpoint: 'messages/like',
-      method: 'POST',
-      body
-    }
-  };
-}
-
-export function sendDislike(body) {
-  return {
-    [CALL_API]: {
-      types: [
-        types.SEND_DISLIKE,
-        types.SEND_DISLIKE_SUCCESS,
-        types.SEND_DISLIKE_FAIL
-      ],
-      endpoint: 'messages/dislike',
-      method: 'POST',
-      body
-    }
-  };
-}
-
-export function sendReaction(body) {
-  return {
-    [CALL_API]: {
-      types: [
-        types.SEND_REACTION,
-        types.SEND_REACTION_SUCCESS,
-        types.SEND_REACTION_FAIL
-      ],
-      endpoint: 'reactions/send',
+      endpoint: 'message/send',
       method: 'POST',
       body
     }

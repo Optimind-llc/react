@@ -219,6 +219,54 @@
           margin: 0;
         }
       }
+
+      .comment-wrap {
+        padding: 8px;
+        .styled-select {
+          background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+          height: 29px;
+          overflow: hidden;
+          width: 100%;
+          margin-bottom: 10px;
+        }
+
+        .styled-select select {
+          background: transparent;
+          border: none;
+          font-size: 14px;
+          height: 29px;
+          padding: 5px;
+          width: 100%;
+
+          option {
+            color: #FFF;
+          }
+        }
+
+        .rounded {
+           -webkit-border-radius: 20px;
+           -moz-border-radius: 20px;
+           border-radius: 10px;
+        }
+
+
+        .yellow  { background-color: #eec111; }
+        .yellow select  { color: #000; }
+
+        textarea {
+          width: 100%;
+        }
+
+        button {
+          display: block;
+          margin: 10px auto;
+          height: 26px;
+          width: 100px;
+          background-color: #eec111;
+          border: none;
+          border-radius: 4px;
+        }
+      }
     }
   }
 }
