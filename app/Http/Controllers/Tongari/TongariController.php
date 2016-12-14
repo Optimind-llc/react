@@ -29,7 +29,7 @@ class TongariController extends Controller
         $school = 'conference';
         $conference_id = 1;
 
-        return view('audience.index', compact('domain', 'env', 'school', 'conference_id'));
+        return view('tongari.index', compact('domain', 'env', 'school', 'conference_id'));
     }
 
     public function createAuditor()
