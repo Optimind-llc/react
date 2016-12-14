@@ -22,6 +22,16 @@ use Illuminate\Http\Request;
  */
 class TongariController extends Controller
 {
+    protected function getAuditor($token)
+    {
+        $auditor = Student::where('api_token', $token)->first();
+        if (!$auditor instanceof Student) {
+            throw new ApiException('Auditor not found');
+        }
+
+        return $auditor;
+    }
+
     public function index()
     {
         $domain = env('APP_URL');
@@ -52,6 +62,17 @@ class TongariController extends Controller
 
     public function vote(Request $request)
     {
+        $now = Carbon::now();
+        $auditor = $this->getAuditor($request->id);
+
+        $message = new Message;
+        $message->conference_id = 7;
+        $message->auditor_id = $auditor->id;
+        $message->text = $request->votes;
+        $message->created_at = $now;
+        $message->updated_at = $now;
+        $message->save();
+
         return \Response::json([
             'message' => 'success'
         ], 200);

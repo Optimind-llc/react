@@ -14,16 +14,12 @@ class Dashboard extends Component {
     super(props, context);
     const { createAuditor } = props.actions;
 
-    this.state = {
-      votes: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0},
-      max: 3,
-      min: 0
-    };
+    createAuditor();
   }
 
-  vote(body) {
-    const { vote } = this.props.actions;
-    vote(body);
+  vote(votes) {
+    const { application, actions } = this.props;
+    actions.vote({votes: votes, id: application.auditorCode});
   }
 
   render() {
@@ -51,7 +47,7 @@ class Dashboard extends Component {
           /> :
           <Vote
             entries={entries}
-            vote={(body) => this.vote(body)}
+            vote={(votes) => this.vote(votes)}
           />
         }
       </div>
