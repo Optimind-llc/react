@@ -77,8 +77,8 @@ Route::group(['namespace' => 'Teacher', 'prefix' => '/{school}/teacher', 'middle
 });
 
 
-Route::get('tongari/vote', 'Tongari\TongariController@index');
-Route::get('tongari/create/auditor', 'Tongari\TongariController@createAuditor');
-Route::post('tongari/vote', 'Tongari\TongariController@vote');
-Route::post('tongari/message/send', 'Tongari\TongariController@sendMessage');
+Route::get('tongali/vote', 'Tongari\TongariController@index');
+Route::get('tongali/create/auditor', 'Tongari\TongariController@createAuditor');
+Route::post('tongali/vote', 'Tongari\TongariController@vote');
+Route::post('tongali/message/send', 'Tongari\TongariController@sendMessage');
 

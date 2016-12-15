@@ -26,7 +26,7 @@ export function callApi(endpoint, method, body) {
   if (/^\//.test(endpoint)) {
     url = DOMAIN_NAME + endpoint;
   } else {
-    url = `${DOMAIN_NAME}/tongari/${endpoint}`
+    url = `${DOMAIN_NAME}/tongali/${endpoint}`
   }
 
   return fetch(url, request)

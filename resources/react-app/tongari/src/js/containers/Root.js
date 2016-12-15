@@ -18,7 +18,7 @@ class Root extends Component {
     return (
       <Provider store={store}>
         <Router history={history}>
-          <Route name="Top" path="tongari" component={App}>
+          <Route name="Top" path="tongali" component={App}>
             <Route path="vote" component={Dashboard}/>
           </Route>
         </Router>
