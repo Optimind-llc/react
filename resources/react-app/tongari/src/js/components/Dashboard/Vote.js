@@ -15,7 +15,7 @@ class Vote extends Component {
     super(props, context);
 
     this.state = {
-      votes: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0},
+      votes: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0},
       max: 3,
       min: 0
     };
@@ -42,7 +42,7 @@ class Vote extends Component {
           {
             entries.map(e =>
               <div className="entry" key={e.id}>
-                <img src=""/>
+                <img src={`/images/tongari/entry/${e.id}.png`}/>
                 <div className="introduction">
                   <p className="team">{e.team}</p>
                   <p className="title">{e.title}</p>

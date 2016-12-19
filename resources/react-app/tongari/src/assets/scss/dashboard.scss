@@ -77,20 +77,21 @@
           .entry {
             margin: 10px 4px;
             padding: 4px;
-            height: 60px;
+            height: 80px;
             border: 1px solid #DADADA;
             border-radius: 4px;
             background-color: #FFF;
 
             img {
               float: left;
-              height: 52px;
-              width: 52px;
+              height: 70px;
+              width: 70px;
             }
 
             .introduction {
               float: left;
               margin-left: 10px;
+              width: calc(100% - 18px - 70px - 40px);
 
               p.team {
                 margin: 2px 0 6px 0; 
@@ -99,7 +100,7 @@
 
               p.title {
                 margin: 0;
-                font-size: 16px;
+                font-size: 15px;
               }
             }
 
@@ -111,7 +112,7 @@
 
               .votes {
                 position: absolute;
-                top: 9px;
+                top: 20px;
                 right: 4px;
                 width: 32px;
                 height: 32px;
@@ -222,6 +223,7 @@
 
       .comment-wrap {
         padding: 8px;
+
         .styled-select {
           background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
           height: 29px;
