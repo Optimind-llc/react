@@ -87,7 +87,7 @@ class TongariController extends Controller
         $message->conference_id = 7;
         $message->auditor_id = $auditor->id;
         // $message->text = json_encode($request->message);
-        $message->text = implode(",", $request->votes);
+        $message->text = implode(",", $request->message);
         $message->created_at = $now;
         $message->updated_at = $now;
         $message->save();
